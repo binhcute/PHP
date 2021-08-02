@@ -107,7 +107,7 @@
                             @if(Session::has("Cart") !=null)
                             <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
                             @else
-                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">0</span><i class="fal fa-shopping-cart"></i></a>
+                            <a href="#offcanvas-cart" class="offcanvas-toggle"><i class="fal fa-shopping-cart"></i></a>
                             @endif
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                             @if(Session::has("Cart") !=null)
                             <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
                             @else
-                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">0</span><i class="fal fa-shopping-cart"></i></a>
+                            <a href="#offcanvas-cart" class="offcanvas-toggle"><i class="fal fa-shopping-cart"></i></a>
                             @endif
                         </div>
                         <div class="mobile-menu-toggle d-xl-none">
@@ -239,7 +239,7 @@
                             @if(Session::has("Cart") !=null)
                             <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
                             @else
-                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">0</span><i class="fal fa-shopping-cart"></i></a>
+                            <a href="#offcanvas-cart" class="offcanvas-toggle"><i class="fal fa-shopping-cart"></i></a>
                             @endif
                         </div>
                         <div class="mobile-menu-toggle">
@@ -289,7 +289,7 @@
                             @if(Session::has("Cart") !=null)
                             <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
                             @else
-                            <a href="#offcanvas-cart" class="offcanvas-toggle"><span id="total-qty-show" class="cart-count">0</span><i class="fal fa-shopping-cart"></i></a>
+                            <a href="#offcanvas-cart" class="offcanvas-toggle"><i class="fal fa-shopping-cart"></i></a>
                             @endif
                         </div>
                         <div class="mobile-menu-toggle">
@@ -451,7 +451,7 @@
             </div>
             <div class="foot">
                 <div class="sub-total">
-                    <strong>Subtotal :</strong>
+                    <strong>Tổng Tiền :</strong>
                     @if(Session::get("Cart")->totalPrice != null)
                     <span class="amount">{{number_format(Session::get("Cart")->totalPrice).' '.'VND'}}</span>
                     @else
@@ -459,7 +459,20 @@
                     @endif
                 </div>
                 <div class="buttons">
-                    <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">view cart</a>
+                    <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">Xem Giỏ Hàng</a>
+                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
+                </div>
+            </div>
+            @endif
+
+            @if(Session::has("Cart") == null)
+            <div class="body customScroll">
+                <strong>Giỏ Hàng trống</strong>
+            </div>
+            <div class="foot">
+
+                <div class="buttons">
+                    <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">Xem Giỏ Hàng</a>
                     <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
                 </div>
             </div>
@@ -511,7 +524,7 @@
                         @if(Session::has("Cart") !=null)
                         <a href="shopping-cart.html"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
                         @else
-                        <a href="shopping-cart.html"><span id="total-qty-show" class="cart-count">0</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="shopping-cart.html"><i class="fal fa-shopping-cart"></i></a>
                         @endif
                     </div>
                 </div>

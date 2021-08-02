@@ -20,12 +20,12 @@
     </div>
     <div class="foot">
         <div class="sub-total">
-            <strong>Subtotal :</strong>
+            <strong>Tổng Tiền :</strong>
             <span class="amount">{{number_format(Session::get('Cart')->totalPrice).' '.'VND'}}</span>
             <input hidden="true" id="total-qty" type="number" value="{{Session::get('Cart')->totalQuantity}}">
         </div>
         <div class="buttons">
-            <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">view cart</a>
+            <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">Xem Giỏ Hàng</a>
             <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
         </div>
     </div>
