@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Article::class, function (Faker $faker) {
     return [
-        'user_id' => 1,
+        'user_id' => $faker->regexify('[1-9]{1}'),
         'article_name' => $faker->catchPhrase,
         'article_keyword' => $faker->word,
         'article_img' => 'blog.jpg',

@@ -180,7 +180,6 @@
         </footer>
       </div>
     </div>
-
     <!-- latest jquery-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="{{URL::asset('server/assets/js/jquery-3.5.1.min.js')}}"></script>
@@ -227,6 +226,8 @@
     <!-- Theme js-->
     <script src="{{URL::asset('server/assets/js/script.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/theme-customizer/customizer.js')}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+<!-- <script src="{{ asset('js/app.js') }}"></script> -->
     <!-- login js-->
     <!-- Plugin used-->
   </body>

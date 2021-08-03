@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends Controller
@@ -64,5 +65,28 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+    }
+
+    public function show_pro_by_cate($category)
+    {
+        $product_by_category = DB::table('tpl_product')
+            ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
+            ->where('tpl_category.cate_id', $category)
+            ->where('tpl_product.status', 1)
+            ->get();
+
+            // dd($product_by_category);   
+        return ProductResource::collection($product_by_category);
+    }
+    public function show_pro_by_port($portfolio)
+    {
+        $product_by_portfolio = DB::table('tpl_product')
+            ->join('tpl_portfolio', 'tpl_portfolio.port_id', '=', 'tpl_product.port_id')
+            ->where('tpl_portfolio.port_id', $portfolio)
+            ->where('tpl_product.status', 1)
+            ->get();
+
+            // dd($product_by_category);   
+    return ProductResource::collection($product_by_portfolio);
     }
 }

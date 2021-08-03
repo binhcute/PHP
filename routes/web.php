@@ -79,7 +79,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('LoginCheck','CheckLoginController@check');
 
-Route::resource('/CheckOut','CheckOutController');
+Route::resource('/DatHang','CheckOutController')->only('store');
 Route::resource('/BinhLuan','CommentController')->only('store');
 //Client
 Route::resource('/','ClientController');
@@ -112,6 +112,7 @@ Route::get('/article','ClientController@article');
 //Cart
 Route::resource('/cart','CartController');
 Route::get('/item-cart/{id}','CartController@AddCart');
+Route::get('/item-cart-dt/{id}/{qty}','CartController@AddCartDT');
 Route::get('/delete-item-cart/{id}','CartController@DeleteItemCart');
 Route::get('/delete-item-list-cart/{id}','CartController@DeleteItemListCart');
 Route::get('/save-item-list-cart/{id}/{qty}','CartController@SaveItemListCart');

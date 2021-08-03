@@ -130,9 +130,6 @@
                         </div>
                     </div>
 
-                    <form action="{{route('cart.store')}}" method="POST">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{$product_detail->product_id}}">
                         <div class="product-variations">
                             <table>
                                 <tbody>
@@ -141,7 +138,7 @@
                                         <td class="value">
                                             <div class="product-quantity">
                                                 <span class="qty-btn minus"><i class="ti-minus"></i></span>
-                                                <input type="text" class="input-qty" name="qty" value="1">
+                                                <input type="text" class="input-qty" id="qty-{{$product_detail->product_id}}" value="1">
                                                 <span class="qty-btn plus"><i class="ti-plus"></i></span>
                                             </div>
                                         </td>
@@ -151,10 +148,9 @@
                         </div>
                         <div class="product-buttons">
                             <a href="#" class="btn btn-icon btn-outline-body btn-hover-dark hintT-top" data-hint="Add to Wishlist"><i class="fal fa-heart"></i></a>
-                            <button type="submit" class="btn btn-dark btn-hover-primary"><i class="fal fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+                            <button type="button" onclick="AddCartDT({{$product_detail->product_id}})" class="btn btn-dark btn-hover-primary"><i class="fal fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
                             <a onclick="updateProduct()" class="btn btn-icon btn-outline-body btn-hover-dark hintT-top" data-hint="Compare"><i class="fal fa-random"></i></a>
                         </div>
-                    </form>
                     <br>
                     <div class="product-meta">
                         <table>
@@ -344,7 +340,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="product_id" value="{{ $product_detail->product_id }}">
-                                <input type="hidden" name="role" value="1">
+                                <input type="hidden" name="role"  value="1">
                                 <div class="col-12 learts-mb-30">
                                     <textarea name="comment_description" id="ckeditor1" placeholder="Bình luận của bạn *"></textarea>
                                 </div>
@@ -414,4 +410,20 @@
     </div>
 </div>
 <!-- Recommended Products Section End -->
+<script type="text/javascript">
+function AddCartDT(id){
+    function AddCartDT(id) {
+        console.log($("#qty-" + id).val());
+        //     $.ajax({
+        //         url: 'item-cart-dt/' + id,
+        //         type: "GET",
+        //     }).done(function(response) {
+        //         console.log(response);
+        //         Render(response);
+        //         alertify.success('Đã Thêm Vào Giỏ Hàng');
+        //     });
+        // }
+}
+}
+</script>
 @endsection

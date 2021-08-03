@@ -5,9 +5,9 @@
   <div class="page-title">
     <div class="row">
       <div class="col-6">
-      <h5>Danh Sách Nhà Cung Cấp</h5>
-      <a style="margin-left:50px" class="btn btn-success" href="{{route('NhaCungCap.create')}}"><i class="fa fa-plus"></i> Thêm Mới</a>
-        </div>
+        <h5>Danh Sách Nhà Cung Cấp</h5>
+        <a style="margin-left:50px" class="btn btn-success" href="{{route('NhaCungCap.create')}}"><i class="fa fa-plus"></i> Thêm Mới</a>
+      </div>
       <div class="col-6">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{route('admin.index')}}"> <i data-feather="home"></i></a></li>
@@ -31,6 +31,11 @@
     <?php
     Session::put('destroy', null);
     ?>
+  </div>
+  @endif
+  @if (Session('success_message'))
+  <div class="alert alert-success">
+    {{session('success_message')}}
   </div>
   @endif
   @if ($info = Session::get('info'))
@@ -67,14 +72,14 @@
                 <form action="{{URL::to('/NhaCungCap/disabled/'.$item->port_id)}}" method="post">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
-                  <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-check" style="font-size:20px;color:blue"></i></button>
+                  <button class="btn btn-outline-light" type="submit" onclick="change_div()"><i class="icofont icofont-ui-check" style="font-size:20px;color:blue"></i></button>
                   <p>Đang hiển thị</p>
                 </form>
                 @else
                 <form action="{{URL::to('/NhaCungCap/enabled/'.$item->port_id)}}" method="post">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
-                  <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-close" style="font-size:20px;color:red"></i></button>
+                  <button class="btn btn-outline-light" type="submit" onclick="change_div()"><i class="icofont icofont-ui-close" style="font-size:20px;color:red"></i></button>
                   <p>Đang ẩn</p>
                 </form>
                 @endif
@@ -115,4 +120,5 @@
   @endif
 </div>
 </div>
+
 @endsection

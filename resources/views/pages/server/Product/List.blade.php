@@ -63,7 +63,7 @@
             <tr>
               <th scope="row">{{ $item->product_id }}</th>
               <td>{{ $item->product_name}}</td>
-              <td>{{ $item->product_price }}</td>
+              <td>{{number_format($item->product_price).' '.'VND'}}</td>
               <td><img class="img-thumbnail" width="75" height="100" width="100" height="100" src="{{ URL::to('/') }}/server/assets/image/product/{{$item->product_img}}"></td>
               <td>
               @if($item->status==1)

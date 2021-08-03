@@ -184,14 +184,15 @@
       <div class="row">
         <div class="col-sm-12">
 
-          @foreach($order_detail as $dt)
-          @if($dt->status == 1)
+
           <div class="card">
             <div class="card-header">
               <h5>Chờ Xác Nhận</h5>
             </div>
             <div class="card-body">
               <div class="row">
+                @foreach($order_detail as $dt)
+                @if($dt->status == 1)
                 <div class="col-xxl-4 col-md-6">
                   <div class="prooduct-details-box">
                     <div class="media"><img class="align-self-center img-fluid img-60" src="{{URL::to('/')}}/server/assets/image/product/{{$dt->product_img}}" alt="#">
@@ -210,20 +211,20 @@
                     </div>
                   </div>
                 </div>
+                @endif
+                @endforeach
               </div>
             </div>
           </div>
 
-          @endif
-          @endforeach
-          @foreach($order_detail as $dt)
-          @if($dt->status == 0)
           <div class="card">
             <div class="card-header">
               <h5>Đang Giao</h5>
             </div>
             <div class="card-body">
               <div class="row">
+                @foreach($order_detail as $dt)
+                @if($dt->status == 0)
                 <div class="col-xxl-4 col-md-6">
                   <div class="prooduct-details-box">
                     <div class="media"><img class="align-self-center img-fluid img-60" src="{{URL::to('/')}}/server/assets/image/product/{{$dt->product_img}}" alt="#">
@@ -242,21 +243,21 @@
                     </div>
                   </div>
                 </div>
+                @endif
+                @endforeach
               </div>
             </div>
           </div>
 
-          @endif
-          @endforeach
 
-          @foreach($order_detail as $dt)
-          @if($dt->status == 2)
           <div class="card">
             <div class="card-header">
               <h5>Giao Thành Công</h5>
             </div>
             <div class="card-body">
               <div class="row">
+                @foreach($order_detail as $dt)
+                @if($dt->status == 2)
                 <div class="col-xxl-4 col-md-6">
                   <div class="prooduct-details-box">
                     <div class="media"><img class="align-self-center img-fluid img-60" src="{{URL::to('/')}}/server/assets/image/product/{{$dt->product_img}}" alt="#">
@@ -275,19 +276,19 @@
                     </div>
                   </div>
                 </div>
+                @endif
+                @endforeach
               </div>
             </div>
           </div>
-          @endif
-          @endforeach
-          @foreach($order_detail as $dt)
-          @if($dt->status == 3)
           <div class="card">
             <div class="card-header">
               <h5>Đã Hủy</h5>
             </div>
             <div class="card-body">
               <div class="row">
+                @foreach($order_detail as $dt)
+                @if($dt->status == 3)
                 <div class="col-xxl-4 col-md-6">
                   <div class="prooduct-details-box">
                     <div class="media"><img class="align-self-center img-fluid img-60" src="{{URL::to('/')}}/server/assets/image/product/{{$dt->product_img}}" alt="#">
@@ -306,11 +307,11 @@
                     </div>
                   </div>
                 </div>
+                @endif
+                @endforeach
               </div>
             </div>
           </div>
-          @endif
-          @endforeach
         </div>
       </div>
     </div>

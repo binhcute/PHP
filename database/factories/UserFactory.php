@@ -23,7 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'username' => $faker->username,
         'phone' => $faker->regexify('0[1-9]{9}'),
         'address' => $faker->address,
-        'gender' => 1,
+        'gender' => $faker->regexify('[0-1]{1}'),
         'avatar' => '20210727174952.jpg',
         'email' => $faker->unique()->email,
         'status' => 1,

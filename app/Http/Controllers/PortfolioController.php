@@ -7,8 +7,7 @@ use App\Models\Portfolio;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
-
+use Alert;
 
 class PortfolioController extends Controller
 {
@@ -180,6 +179,9 @@ class PortfolioController extends Controller
         $port->status = 0;
         $port->save();
         Session::put('info', 'Đã Ẩn Nhà Cung Cấp');
+        // alert()->info('Đã Ẩn Nhà Cung Cấp');
+        // return redirect()->route('NhaCungCap.index')->with('success', 'Profile updated!');
+        // Alert::success('Robots are working!');
         return redirect()->route('NhaCungCap.index');
     }
     public function enabled($id)

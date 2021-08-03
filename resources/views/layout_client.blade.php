@@ -460,7 +460,6 @@
                 </div>
                 <div class="buttons">
                     <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">Xem Giỏ Hàng</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
                 </div>
             </div>
             @endif
@@ -473,7 +472,6 @@
 
                 <div class="buttons">
                     <a href="{{route('cart.index')}}" class="btn btn-dark btn-hover-primary">Xem Giỏ Hàng</a>
-                    <a href="checkout.html" class="btn btn-outline-dark">checkout</a>
                 </div>
             </div>
             @endif

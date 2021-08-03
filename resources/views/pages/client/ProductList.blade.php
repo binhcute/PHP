@@ -112,7 +112,7 @@
                                     </span>
                                     <div class="product-buttons">
                                         <a href="#quickViewModal" data-toggle="modal" class="product-button hintT-top" data-hint="Quick View"><i class="fal fa-search"></i></a>
-                                        <a onclick="addProduct('{{$item->product_id}}','{{$item->product_name}}','{{$item->product_price}}',`{{ URL::to('/') }}/server/assets/image/product/{{ $item->product_img }}`,this)" class="product-button hintT-top" data-hint="Add to Cart"><i class="fal fa-shopping-cart"></i></a>
+                                        <a onclick="addCart({{$item->product_id}})" class="product-button hintT-top" data-hint="Add to Cart"><i class="fal fa-shopping-cart"></i></a>
                                         <a href="#" class="product-button hintT-top" data-hint="Compare"><i class="fal fa-random"></i></a>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
                                     </span>
                                     <div class="product-buttons">
                                         <a href="#quickViewModal" data-toggle="modal" class="product-button hintT-top" data-hint="Quick View"><i class="fal fa-search"></i></a>
-                                        <a onclick="addProduct('{{$item->product_id}}','{{$item->product_name}}','{{$item->product_price}}',`{{ URL::to('/') }}/server/assets/image/product/{{ $item->product_img }}`,this)" class="product-button hintT-top" data-hint="Add to Cart"><i class="fal fa-shopping-cart"></i></a>
+                                        <a onclick="addCart({{$item->product_id}})" class="product-button hintT-top" data-hint="Add to Cart"><i class="fal fa-shopping-cart"></i></a>
                                         <a href="#" class="product-button hintT-top" data-hint="Compare"><i class="fal fa-random"></i></a>
                                     </div>
                                 </div>

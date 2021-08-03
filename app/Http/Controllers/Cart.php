@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Controllers;
 
 class Cart
 {
@@ -19,6 +19,21 @@ class Cart
     public function AddCart($product, $id)
     {
         $new_product = ['qty' => 0, 'price' => $product->product_price, 'product_info' => $product];
+        if ($this->product) {
+            if (array_key_exists($id, $this->product)) {
+                $new_product = $this->product[$id];
+            }
+        }
+        $new_product['qty']++;
+        $new_product['price'] = $new_product['qty'] * $product->product_price;
+        $this->product[$id] = $new_product;
+        $this->totalQuantity++;
+        $this->totalPrice += $product->product_price;
+    }
+
+    public function AddCartDT($product, $id, $qty)
+    {
+        $new_product = ['qty' => $qty, 'price' => $product->product_price, 'product_info' => $product];
         if ($this->product) {
             if (array_key_exists($id, $this->product)) {
                 $new_product = $this->product[$id];

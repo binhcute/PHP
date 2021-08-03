@@ -8,9 +8,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        'cate_id' => 1,
-        'user_id' => 1,
-        'port_id' => 1,
+        'cate_id' => $faker->regexify('[1-8]{1}'),
+        'user_id' => $faker->regexify('[1-9]{1}'),
+        'port_id' => $faker->regexify('[1-8]{1}'),
         'product_name' => $faker->name,
         'product_img' => '20210726090152.jpg',
         'product_img_hover' => '20210726090152.jpg',
