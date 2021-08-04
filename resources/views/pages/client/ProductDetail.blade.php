@@ -412,7 +412,6 @@
 <!-- Recommended Products Section End -->
 <script type="text/javascript">
 function AddCartDT(id){
-    function AddCartDT(id) {
         console.log($("#qty-" + id).val());
         //     $.ajax({
         //         url: 'item-cart-dt/' + id,
@@ -423,7 +422,6 @@ function AddCartDT(id){
         //         alertify.success('Đã Thêm Vào Giỏ Hàng');
         //     });
         // }
-}
 }
 </script>
 @endsection

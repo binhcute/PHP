@@ -17,6 +17,7 @@ class Article extends Model
         'user_id',
         'article_name',
         'article_img',
+        'article_detail',
         'article_description',
         'article_keyword',
         'status',

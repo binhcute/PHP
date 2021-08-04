@@ -81,8 +81,17 @@ class CheckOutController extends Controller
                 $order_dt->save();
             }
             $request->Session()->forget('Cart');
-            
-            return redirect()->route('index');
+            if($order_dt->save()){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Đặt hàng thành công'
+                ],200);
+            }
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Đặt hàng thất bại'
+            ],200);
+            // return redirect()->route('index');
         } catch (Exception $e) {
             echo $e->getMessage();
         }

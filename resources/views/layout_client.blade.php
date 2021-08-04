@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="{{asset('client/css/vendor/vendor.min.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/plugins/plugins.min.css')}}">
     <link rel="stylesheet" href="{{asset('client/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.css')}}">
 
 </head>
 
@@ -806,6 +807,10 @@
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
 
+    
+    <script src="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.js')}}"></script>
+
+    @yield('page-js')
 </body>
 
 

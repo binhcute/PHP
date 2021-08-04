@@ -112,8 +112,16 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 0;
         $order->save();
-        Session::put('info', 'Đơn Hàng Đang Được Vận Chuyển');
-        return redirect()->route('HoaDon.index');
+        if($order->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đơn Hàng Đã Giao Cho Shipper'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đơn Hàng Đã Giao Cho Shipper Thất Bại'
+        ],200);
     }
     public function update_status_1($id)
     {
@@ -121,8 +129,16 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 1;
         $order->save();
-        Session::put('seccondary', 'Đơn Hàng Đang Chờ Xử Lý');
-        return redirect()->route('HoaDon.index');
+        if($order->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đơn hàng đang chờ thanh toán'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đơn hàng đang chờ thanh toán thất bại'
+        ],200);
     }
 
     public function update_status_2($id)
@@ -131,8 +147,16 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 2;
         $order->save();
-        Session::put('success', 'Đơn Hàng Được Giao Thành Công');
-        return redirect()->route('HoaDon.index');
+        if($order->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đơn hàng đã giao thành công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đơn hàng giao thành công thất bại'
+        ],200);
     }
 
     public function update_status_3($id)
@@ -141,8 +165,16 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 3;
         $order->save();
-        Session::put('error', 'Đơn Hàng Bị Hủy Đơn');
-        return redirect()->route('HoaDon.index');
+        if($order->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đơn hàng đã bị hủy'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Hủy đơn hàng thất bại'
+        ],200);
     }
     /**
      * Show the form for editing the specified resource.

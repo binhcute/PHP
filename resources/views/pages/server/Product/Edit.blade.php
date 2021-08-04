@@ -60,7 +60,7 @@
             <label class="col-sm-3 col-form-label">Loại Sản Phẩm</label>
             <div class="col-sm-9">
               <select class="form-select" aria-label="select example" name="cate_id">
-                @foreach($category as $cate)
+                @foreach($cate as $cate)
                   @if($cate->cate_id == $product->cate_id)
                     <option selected value="{{$cate->cate_id}}">{{$cate->cate_name}}</option>
                     @else
@@ -74,7 +74,7 @@
             <label class="col-sm-3 col-form-label">Nhà Cung Cấp</label>
             <div class="col-sm-9">
             <select class="form-select" aria-label="select example" name="port_id">
-                @foreach($portfolio as $port)
+                @foreach($port as $port)
                   @if($port->port_id == $product->port_id)
                     <option selected value="{{$port->port_id}}">{{$port->port_name}}</option>
                     @else

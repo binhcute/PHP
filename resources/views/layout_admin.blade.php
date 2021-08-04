@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/vendors/date-picker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/vendors/scrollbar.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/vendors/datatables.css')}}">
+    <link rel="stylesheet" href="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.css')}}">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/vendors/bootstrap.css')}}">
@@ -116,9 +117,9 @@
         <div class="sidebar-wrapper">
           <div>
             <div class="logo-wrapper"><a href="{{route('admin.index')}}">
-            <img class="img-fluid for-light" width="150" height="30" src="{{asset('client/images/logo/logo-2.png')}}">
-            <img class="img-fluid for-light" style="max-width:26%" src="{{asset('client/images/logo/genz.gif')}}" alt="Learts Logo">
-            <img class="img-fluid for-dark" style="padding-left:40px;max-width:56%" src="{{asset('client/images/logo/dark.gif')}}" alt=""></a>
+                <img class="img-fluid for-light" width="150" height="30" src="{{asset('client/images/logo/logo-2.png')}}">
+                <img class="img-fluid for-light" style="max-width:26%" src="{{asset('client/images/logo/genz.gif')}}" alt="Learts Logo">
+                <img class="img-fluid for-dark" style="padding-left:40px;max-width:56%" src="{{asset('client/images/logo/dark.gif')}}" alt=""></a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             </div>
             <div class="logo-icon-wrapper"><a href="{{route('admin.index')}}"><img class="img-fluid" src="{{asset('server/assets/images/logo/logo-icon.png')}}" alt=""></a></div>
@@ -126,8 +127,8 @@
               <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
               <div id="sidebar-menu">
                 <ul class="sidebar-links" id="simple-bar">
-                
-                <li class="back-btn"><a href="index.html"><img class="img-fluid" src="{{asset('server/assets/images/logo/logo-icon.png')}}" alt=""></a>
+
+                  <li class="back-btn"><a href="index.html"><img class="img-fluid" src="{{asset('server/assets/images/logo/logo-icon.png')}}" alt=""></a>
                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                   </li>
                   <li class="sidebar-main-title">
@@ -181,7 +182,7 @@
       </div>
     </div>
     <!-- latest jquery-->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
     <script src="{{URL::asset('server/assets/js/jquery-3.5.1.min.js')}}"></script>
     <script src="{{URL::asset('ckeditor/ckeditor.js')}}"></script>
     <script src="{{URL::asset('ckeditor/ckfinder/ckfinder.js')}}"></script>
@@ -221,15 +222,16 @@
     <script src="{{URL::asset('server/assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/datatable/datatables/datatable.custom.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/tooltip-init.js')}}"></script>
-
+    <script src="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.js')}}"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{URL::asset('server/assets/js/script.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/theme-customizer/customizer.js')}}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-<!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
     <!-- login js-->
     <!-- Plugin used-->
+    @yield('page-js')
   </body>
 
   <!-- Mirrored from admin.pixelstrap.com/cuba/theme/{{route('admin.index')}} by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 May 2021 10:56:01 GMT -->

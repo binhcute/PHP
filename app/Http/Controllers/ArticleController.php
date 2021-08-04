@@ -146,15 +146,31 @@ class ArticleController extends Controller
         $article = article::find($id);
         $article->status = 0;
         $article->save();
-        Session::put('info', 'Đã Ẩn Bài Viết');
-        return redirect()->route('BaiViet.index');
+        if($article->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Ẩn Bài Viết Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đã Ẩn Bài Viết Thất Bại'
+        ],200);
     }
     public function enabled($id)
     {
         $article = article::find($id);
         $article->status = 1 ;
         $article->save();
-        Session::put('info', 'Đã Hiển Thị Bài Viết');
-        return redirect()->route('BaiViet.index');
+        if($article->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hiển Thị Bài Viết Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Hiển Thị Bài Viết Thất Bại'
+        ],200);
     }
 }

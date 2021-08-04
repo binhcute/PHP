@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-6">
         <a class="btn btn-primary" href="{{route('LoaiSanPham.index')}}"><i class="fa fa-angle-double-left"></i> Quay Lại</a>
-        <a style="margin-left:10px" class="btn btn-secondary" href="{{route('LoaiSanPham.edit',$cate->cate_id)}}"><i class="fa fa-pencil"></i> Chỉnh Sửa</a>
+        <a style="margin-left:10px" class="btn btn-secondary" href="{{route('LoaiSanPham.edit',$cate->cate_id)}}"><i class="fas fa-pencil-alt"></i> Chỉnh Sửa</a>
         </div>
       <div class="col-6">
         <ol class="breadcrumb">

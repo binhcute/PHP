@@ -147,15 +147,31 @@ class CategoryController extends Controller
         $cate = Category::find($id);
         $cate->status = 0;
         $cate->save();
-        Session::put('info', 'Đã Ẩn Loại Sản Phẩm');
-        return redirect()->route('LoaiSanPham.index');
+        if($cate->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Ẩn Danh Mục Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đã Ẩn Danh Mục Thất Bại'
+        ],200);
     }
     public function enabled($id)
     {
         $cate = Category::find($id);
         $cate->status = 1;
         $cate->save();
-        Session::put('info', 'Đã Hiển Thị Loại Sản Phẩm');
-        return redirect()->route('LoaiSanPham.index');
+        if($cate->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hiển Thị Danh Mục Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Hiển Thị Danh Mục Thất Bại'
+        ],200);
     }
 }

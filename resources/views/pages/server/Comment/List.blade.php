@@ -89,16 +89,16 @@
                   <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-paper" style="font-size:20px;color:green"></i></i></button>
                 </form>
                 @if ($item->status == 1)
-                <form method="post" action="{{URL::to('/BinhLuan/disabled/'.$item->comment_id)}}">
+                <form method="post" action="{{URL::to('/BinhLuan/disabled/'.$item->comment_id)}}" class="change_status_tri">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
-                  <button class="btn btn-outline-light" type="submit"><i class="icofont-ui-check" style="font-size:20px;color:cornflowerblue" onclick="return confirm('Bạn muốn ẩn bình luận này đi ?')"></i></button>
+                  <button class="btn btn-outline-light" type="submit"><i class="icofont-ui-check" style="font-size:20px;color:cornflowerblue"></i></button>
                 </form>
                 @else
-                <form method="post" action="{{URL::to('/BinhLuan/enabled/'.$item->comment_id)}}">
+                <form method="post" action="{{URL::to('/BinhLuan/enabled/'.$item->comment_id)}}" class="change_status_tri">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
-                  <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-close" style="font-size:20px;color:red" onclick="return confirm('Bình luận đã bị ẩn, bạn muốn kích hoạt lại ?')" ></i></button>
+                  <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-close" style="font-size:20px;color:red"></i></button>
                 </form>
                 @endif
               </td>
@@ -124,4 +124,47 @@
   @endif
 </div>
 </div>
+@endsection
+@section('page-js')
+<script>
+  function changeStatus(event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function(data) {
+        if (data.status == 'error') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Thất Bại',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+        }
+        if (data.status == 'success') {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thành Công',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 3000);
+        }
+      }
+    });
+
+  }
+  $(function() {
+    $(document).on('click', '.change_status_tri', changeStatus);
+  });
+</script>
 @endsection

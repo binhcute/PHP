@@ -59,16 +59,32 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         $comment->status = 0;
         $comment->save();
-        Session::put('info', 'Đã Ẩn Bình Luận');
-        return redirect()->back();
+        if($comment->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Ẩn Bình Luận Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đã Ẩn Bình Luận Thất Bại'
+        ],200);
     }
     public function enabled($id)
     {
         $comment = Comment::find($id);
         $comment->status = 1;
         $comment->save();
-        Session::put('info', 'Đã Hiển Thị Bình Luận');
-        return redirect()->back();
+        if($comment->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hiển Thị Bình Luận Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Hiển Thị Bình Luận Thất Bại'
+        ],200);
     }
     /**
      * Display the specified resource.

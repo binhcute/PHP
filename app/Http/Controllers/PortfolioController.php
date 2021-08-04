@@ -178,18 +178,31 @@ class PortfolioController extends Controller
         $port = Portfolio::find($id);
         $port->status = 0;
         $port->save();
-        Session::put('info', 'Đã Ẩn Nhà Cung Cấp');
-        // alert()->info('Đã Ẩn Nhà Cung Cấp');
-        // return redirect()->route('NhaCungCap.index')->with('success', 'Profile updated!');
-        // Alert::success('Robots are working!');
-        return redirect()->route('NhaCungCap.index');
+        if($port->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Ẩn Nhà Cung Cấp Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đã Ẩn Nhà Cung Cấp Thất Bại'
+        ],200);
     }
     public function enabled($id)
     {
         $port = Portfolio::find($id);
         $port->status = 1;
         $port->save();
-        Session::put('info', 'Đã Hiển Thị Nhà Cung Cấp');
-        return redirect()->route('NhaCungCap.index');
+        if($port->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hiển Thị Nhà Cung Cấp Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Hiển Thị Nhà Cung Cấp Thất Bại'
+        ],200);
     }
 }

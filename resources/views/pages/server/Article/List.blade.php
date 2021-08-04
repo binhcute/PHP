@@ -3,50 +3,26 @@
 @section('content')
 <div class="col-sm-12">
   <div class="page-title">
-      <div class="row">
-        <div class="col-6">
-          <h3>Danh Sách Bài Viết</h3>
-          <a style="margin-left:50px" class="btn btn-success" href="{{route('BaiViet.create')}}"><i class="fa fa-plus"></i> Thêm Mới</a>
-        </div>
-        <div class="col-6">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.index')}}"> <i data-feather="home"></i></a></li>
-            <li class="breadcrumb-item">Bài Viết</li>
-            <li class="breadcrumb-item active">Danh Sách</li>
-          </ol>
-        </div>
+    <div class="row">
+      <div class="col-6">
+        <h3>Danh Sách Bài Viết</h3>
+        <a style="margin-left:50px" class="btn btn-success" href="{{route('BaiViet.create')}}"><i class="fa fa-plus"></i> Thêm Mới</a>
+      </div>
+      <div class="col-6">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{route('admin.index')}}"> <i data-feather="home"></i></a></li>
+          <li class="breadcrumb-item">Bài Viết</li>
+          <li class="breadcrumb-item active">Danh Sách</li>
+        </ol>
       </div>
     </div>
-    @if ($message = Session::get('message'))
-  <div class="alert alert-success alert-block">
-    <strong>{{ $message }}</strong>
-    <?php
-    Session::put('message', null);
-    ?>
   </div>
-  @endif
-  @if ($destroy = Session::get('destroy'))
-  <div class="alert alert-danger alert-block">
-    <strong>{{ $destroy }}</strong>
-    <?php
-    Session::put('destroy', null);
-    ?>
-  </div>
-  @endif
-  @if ($info = Session::get('info'))
-  <div class="alert alert-primary alert-block">
-    <strong>{{ $info }}</strong>
-    <?php
-    Session::put('info', null);
-    ?>
-  </div>
-  @endif
   <div class="card">
     @if(count($article)!= 0)
     <div class="card-body">
       <div class="table-responsive">
-      <table class="display" id="basic-1">
-      <thead>
+        <table class="display" id="basic-1">
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Tên</th>
@@ -55,23 +31,23 @@
               <th scope="col">Tác Vụ</th>
             </tr>
           </thead>
-        <tbody>
-        @foreach($article as $item)
-          <tr>
-            <th scope="row">{{ $item->article_id }}</th>
-            <td>{{ $item->article_name}}</td>
-            <td><img class="img-thumbnail" width="100" height="100" src="{{ URL::to('/') }}/server/assets/image/article/{{$item->article_img}}"></td>
-            <td>
+          <tbody>
+            @foreach($article as $item)
+            <tr>
+              <th scope="row">{{ $item->article_id }}</th>
+              <td>{{ $item->article_name}}</td>
+              <td><img class="img-thumbnail" width="100" height="100" src="{{ URL::to('/') }}/server/assets/image/article/{{$item->article_img}}"></td>
+              <td>
                 @if($item->status==1)
 
-                <form action="{{URL::to('/BaiViet/disabled/'.$item->article_id)}}" method="post">
+                <form action="{{URL::to('/BaiViet/disabled/'.$item->article_id)}}" class="change_status_tri" method="post">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
                   <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-check" style="font-size:20px;color:blue"></i></button>
                   <p>Đang hiển thị</p>
                 </form>
                 @else
-                <form action="{{URL::to('/BaiViet/enabled/'.$item->article_id)}}" method="post">
+                <form action="{{URL::to('/BaiViet/enabled/'.$item->article_id)}}" class="change_status_tri" method="post">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
                   <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-close" style="font-size:20px;color:red"></i></button>
@@ -79,7 +55,7 @@
                 </form>
                 @endif
               </td>
-            <td class="flex-column align-items-center justify-content-around">
+              <td class="flex-column align-items-center justify-content-around">
                 <a href="{{route('BaiViet.show',$item->article_id)}}" method="get">
                   <i class="icofont icofont-paper" style="font-size:20px;color:green"></i>
                 </a>
@@ -92,10 +68,10 @@
                   <i class="icofont icofont-trash" style="font-size:20px;color:red"></i>
                 </a>
               </td>
-          </tr>
-          @endforeach
-        </tbody>
-        <tfoot>
+            </tr>
+            @endforeach
+          </tbody>
+          <tfoot>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Tên</th>
@@ -104,13 +80,56 @@
               <th scope="col">Tác Vụ</th>
             </tr>
           </tfoot>
-      </table>
-    </div>
+        </table>
+      </div>
     </div>
   </div>
-    @else
+  @else
   <strong class="text-center">Danh Sách Trống</strong>
   @endif
 </div>
 </div>
+@endsection
+@section('page-js')
+<script>
+  function changeStatus(event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function(data) {
+        if (data.status == 'error') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Thất Bại',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+        }
+        if (data.status == 'success') {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thành Công',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 3000);
+        }
+      }
+    });
+
+  }
+  $(function() {
+    $(document).on('click', '.change_status_tri', changeStatus);
+  });
+</script>
 @endsection

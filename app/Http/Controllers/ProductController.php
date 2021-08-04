@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Alert;
 
 
 
@@ -204,15 +205,31 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->status = 0;
         $product->save();
-        Session::put('info', 'Đã Ẩn Sản Phẩm');
-        return redirect()->route('SanPham.index');
+        if($product->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Ẩn Sản Phẩm Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Đã Ẩn Sản Phẩm Thất Bại'
+        ],200);
     }
     public function enabled($id)
     {
         $product = Product::find($id);
         $product->status = 1;
         $product->save();
-        Session::put('info', 'Đã Hiển Thị Sản Phẩm');
-        return redirect()->route('SanPham.index');
+        if($product->save()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hiển Thị Sản Phẩm Thành Công'
+            ],200);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Hiển Thị Sản Phẩm Thất Bại'
+        ],200);
     }
 }

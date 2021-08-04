@@ -17,35 +17,6 @@
       </div>
     </div>
   </div>
-  @if ($message = Session::get('message'))
-  <div class="alert alert-success alert-block">
-    <strong>{{ $message }}</strong>
-    <?php
-    Session::put('message', null);
-    ?>
-  </div>
-  @endif
-  @if ($destroy = Session::get('destroy'))
-  <div class="alert alert-danger alert-block">
-    <strong>{{ $destroy }}</strong>
-    <?php
-    Session::put('destroy', null);
-    ?>
-  </div>
-  @endif
-  @if (Session('success_message'))
-  <div class="alert alert-success">
-    {{session('success_message')}}
-  </div>
-  @endif
-  @if ($info = Session::get('info'))
-  <div class="alert alert-primary alert-block">
-    <strong>{{ $info }}</strong>
-    <?php
-    Session::put('info', null);
-    ?>
-  </div>
-  @endif
   <div class="card">
     @if(count($port)!= 0)
     <div class="card-body">
@@ -69,17 +40,17 @@
               <td>
                 @if($item->status==1)
 
-                <form action="{{URL::to('/NhaCungCap/disabled/'.$item->port_id)}}" method="post">
+                <form action="{{URL::to('/NhaCungCap/disabled/'.$item->port_id)}}" class="change_status_tri" method="post">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
-                  <button class="btn btn-outline-light" type="submit" onclick="change_div()"><i class="icofont icofont-ui-check" style="font-size:20px;color:blue"></i></button>
+                  <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-check" style="font-size:20px;color:blue"></i></button>
                   <p>Đang hiển thị</p>
                 </form>
                 @else
-                <form action="{{URL::to('/NhaCungCap/enabled/'.$item->port_id)}}" method="post">
+                <form action="{{URL::to('/NhaCungCap/enabled/'.$item->port_id)}}" class="change_status_tri" method="post">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="put" />
-                  <button class="btn btn-outline-light" type="submit" onclick="change_div()"><i class="icofont icofont-ui-close" style="font-size:20px;color:red"></i></button>
+                  <button class="btn btn-outline-light" type="submit"><i class="icofont icofont-ui-close" style="font-size:20px;color:red"></i></button>
                   <p>Đang ẩn</p>
                 </form>
                 @endif
@@ -93,7 +64,7 @@
 
                   <i class="icofont icofont-pencil-alt-5" style="font-size:20px;color:blue"></i>
                 </a>
-                <a href="{{URL::to('/XoaNhaCungCap',$item->port_id)}}" onclick="return confirm('Bạn muốn xóa nhà cung cấp này ?')">
+                <a href="{{URL::to('/XoaNhaCungCap',$item->port_id)}}" class="delete-item">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">
                   <input type="hidden" name="_method" value="delete">
                   <i class="icofont icofont-trash" style="font-size:20px;color:red"></i>
@@ -121,4 +92,47 @@
 </div>
 </div>
 
+@endsection
+@section('page-js')
+<script>
+  function changeStatus(event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function(data) {
+        if (data.status == 'error') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Thất Bại',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+        }
+        if (data.status == 'success') {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thành Công',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 3000);
+        }
+      }
+    });
+
+  }
+  $(function() {
+    $(document).on('click', '.change_status_tri', changeStatus);
+  });
+</script>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layout_client')
 @section('content')
 @section('title','Thanh Toán')
-<form method="post" action="{{route('DatHang.store')}}" enctype="multipart/form-data">
+<form method="post" action="{{route('DatHang.store')}}" enctype="multipart/form-data" class="submit-form-checkout">
 @csrf
     <!-- Page Title/Header Start -->
     <div class="page-title-section section" data-bg-image="{{asset('client/images/bg/page-title-1.jpg')}}">
@@ -151,3 +151,46 @@
     <!-- Checkout Section End -->
 </form>
     @endsection
+@section('page-js')
+<script>
+  function submitCheckout(event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function(data) {
+        if (data.status == 'error') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Thất Bại',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+        }
+        if (data.status == 'success') {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thành Công',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+          window.setTimeout(function() {
+            window.location.replace("{{URL::to('/')}}");
+          }, 3000);
+        }
+      }
+    });
+
+  }
+  $(function() {
+    $(document).on('click', '.submit-form-checkout', submitCheckout);
+  });
+</script>
+@endsection
