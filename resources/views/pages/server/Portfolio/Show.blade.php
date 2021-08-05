@@ -64,6 +64,10 @@
               <td> <b>Thời Gian Chỉnh Sửa &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
               <td>{{$port->updated_at}}</td>
             </tr>
+            <tr>
+              <td> <b>Avatar &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;</b></td>
+              <td><img class="img-thumbnail" src="{{URL::to('/') }}/server/assets/image/portfolio/avatar/{{ $port->port_avatar }}" alt=""></td>
+            </tr>
           </tbody>
         </table>
       </div>

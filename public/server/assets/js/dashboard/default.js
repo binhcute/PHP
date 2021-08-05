@@ -27,7 +27,7 @@ function startTime() {
     m = checkTime(m);
     // s = checkTime(s);
     document.getElementById('txt').innerHTML =
-        h + ":" + m + ' ' + ampm;
+      h + ":" + m + ' ' + ampm;
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {

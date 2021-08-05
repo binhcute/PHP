@@ -57,7 +57,7 @@ class AccountController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/account'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 
@@ -122,7 +122,7 @@ class AccountController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/account'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 

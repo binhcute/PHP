@@ -21,9 +21,9 @@ class ProductController extends Controller
     public function index()
     {
         $product = DB::table('tpl_product')
-            ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
-            ->join('tpl_portfolio', 'tpl_portfolio.port_id', '=', 'tpl_product.port_id')
-            ->orderBy('product_id', 'desc')->get();
+            // ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
+            // ->join('tpl_portfolio', 'tpl_portfolio.port_id', '=', 'tpl_product.port_id')
+            ->orderBy('tpl_product.product_id', 'ASC')->get();
         return view('pages.server.product.list')
             ->with('product', $product);
     }
@@ -74,7 +74,7 @@ class ProductController extends Controller
         $files = $request->file('img');
         // Define upload path
         $destinationPath = public_path('/server/assets/image/product'); // upload path
-        // Upload Orginal Image           
+        // Upload Original Image           
         $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
         $files->move($destinationPath, $profileImage);
 
@@ -87,7 +87,7 @@ class ProductController extends Controller
         if ($files != null) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/product/hover'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 
@@ -160,7 +160,7 @@ class ProductController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/product'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 
@@ -173,7 +173,7 @@ class ProductController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/product/hover'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 

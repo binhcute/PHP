@@ -56,7 +56,7 @@ class PortfolioController extends Controller
         if ($files != NULL) {
         // Define upload path
         $destinationPath = public_path('/server/assets/image/portfolio/avatar'); // upload path
-        // Upload Orginal Image           
+        // Upload Original Image           
         $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
         $files->move($destinationPath, $profileImage);
 
@@ -70,7 +70,7 @@ class PortfolioController extends Controller
         if ($files != NULL) {
         // Define upload path
         $destinationPath = public_path('/server/assets/image/portfolio'); // upload path
-        // Upload Orginal Image           
+        // Upload Original Image           
         $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
         $files->move($destinationPath, $profileImage);
 
@@ -133,7 +133,7 @@ class PortfolioController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/portfolio/avatar'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 
@@ -146,7 +146,7 @@ class PortfolioController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/portfolio'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 

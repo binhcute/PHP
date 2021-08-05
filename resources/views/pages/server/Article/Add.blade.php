@@ -52,7 +52,7 @@
             <div class="mb-3 row">
               <label class="col-sm-3 col-form-label">Tên Bài Viết</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" placeholder="Nhập tên loại Bài Viết" name="name">
+                <input class="form-control" type="text" placeholder="Nhập tên Bài Viết" name="name">
               </div>
               @error('name')
                 <span class="invalid-feedback" role="alert">

@@ -54,7 +54,7 @@ class CategoryController extends Controller
         $files = $request->file('img');
         // Define upload path
         $destinationPath = public_path('/server/assets/image/category'); // upload path
-        // Upload Orginal Image           
+        // Upload Original Image           
         $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
         $files->move($destinationPath, $profileImage);
 
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/category'); // upload path
-            // Upload Orginal Image           
+            // Upload Original Image           
             $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $files->move($destinationPath, $profileImage);
 

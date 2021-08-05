@@ -53,7 +53,7 @@ class ArticleController extends Controller
         
        // Define upload path
            $destinationPath = public_path('/server/assets/image/article'); // upload path
-        // Upload Orginal Image           
+        // Upload Original Image           
            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
            $files->move($destinationPath, $profileImage);
  
@@ -114,7 +114,7 @@ class ArticleController extends Controller
         if ($files != NULL) {
        // Define upload path
            $destinationPath = public_path('/server/assets/image/article'); // upload path
-        // Upload Orginal Image           
+        // Upload Original Image           
            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
            $files->move($destinationPath, $profileImage);
  
