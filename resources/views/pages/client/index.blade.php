@@ -52,7 +52,7 @@
         <!-- Section Title Start -->
         <div class="section-title text-center">
             <h3 class="sub-title">Dành Cho Bạn</h3>
-            <h2 class="title title-icon-both">Making & crafting</h2>
+            <h2 class="title title-icon-both">Danh Mục Sản Phẩm</h2>
         </div>
         <!-- Section Title End -->
 
@@ -109,7 +109,7 @@
                                         <img src="{{ URL::to('/') }}/server/assets/image/product/{{ $item->product_img }}" alt="Product Image">
                                         <img class="image-hover " src="{{ URL::to('/') }}/server/assets/image/product/hover/{{ $item->product_img_hover }}" alt="Product Image">
                                     </a>
-                                    <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+                                    <a href="javascript:" onclick="AddFavorite({{$item->product_id}})" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                                 </div>
                                 <div class="product-info">
                                     <h6 class="title"><a href="{{URL::to('product',$item->product_id)}}">{{$item->product_name}}</a></h6>
@@ -147,7 +147,7 @@
                                             <img src="{{ URL::to('/') }}/server/assets/image/product/{{ $item->product_img }}" alt="Product Image">
                                             <img class="image-hover " src="{{ URL::to('/') }}/server/assets/image/product/hover/{{ $item->product_img_hover }}" alt="Product Image">
                                         </a>
-                                        <a href="wishlist.html" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
+                                        <a href="javascript:" onclick="AddFavorite({{$item->product_id}})" class="add-to-wishlist hintT-left" data-hint="Add to wishlist"><i class="far fa-heart"></i></a>
                                     </div>
                                     <div class="product-info">
                                         <h6 class="title"><a href="{{URL::to('product',$item->product_id)}}">{{$item->product_name}}</a></h6>

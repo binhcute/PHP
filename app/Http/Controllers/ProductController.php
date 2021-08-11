@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Alert;
-
+use App\Http\Requests\Admin\StoreProductRequest;
 
 
 class ProductController extends Controller
@@ -50,15 +50,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'cate_id' => ['required'],
-            'port_id' => ['required'],
-            'img' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => ['required', 'max:255'],
-            'price' => ['required']
-        ]);
         $product = new Product();
         $product->cate_id = $request->cate_id;
         $product->port_id = $request->port_id;

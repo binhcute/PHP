@@ -52,7 +52,8 @@ class OrderDetailController extends Controller
      */
     public function update(Request $request, OrderDetail $orderDetail)
     {
-        return $orderDetail->update($request->all());
+        $orderDetail->update($request->all());
+        return new OrderDetailResource($orderDetail);
     }
 
     /**
@@ -64,5 +65,6 @@ class OrderDetailController extends Controller
     public function destroy(OrderDetail $orderDetail)
     {
         $orderDetail->delete();
+        return response()->noContent();
     }
 }

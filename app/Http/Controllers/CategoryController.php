@@ -7,7 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use App\Http\Requests\Admin\StoreCategoryRequest;
 
 
 class CategoryController extends Controller
@@ -40,12 +40,8 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $request->validate([
-            'img' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => ['required', 'max:255'],
-        ]);
         $cate = new Category();
         $cate->user_id = Auth::user()->id;
         $cate->cate_name = $request->name;

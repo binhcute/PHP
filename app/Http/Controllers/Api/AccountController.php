@@ -40,6 +40,7 @@ class AccountController extends Controller
      */
     public function show(User $user)
     {
+        dd($user);
         return new AccountResource($user);
     }
 
@@ -52,7 +53,9 @@ class AccountController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        return $user->update($request->all());
+        $user->update($request->all());
+        
+        return new AccountResource($user);
     }
 
     /**
@@ -64,5 +67,6 @@ class AccountController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        return response()->noContent();
     }
 }

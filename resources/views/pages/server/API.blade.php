@@ -28,13 +28,15 @@
       <hr>
       <div>
         <div class="card-body">
-      <a class="btn btn-primary-gradien" href="{{URL::to('/api/product')}}">Sản Phẩm</a> 
-      <a class="btn btn-secondary-gradien" href="{{URL::to('/api/category')}}">Danh Mục</a> 
-      <a class="btn btn-success-gradien" href="{{URL::to('/api/portfolio')}}">Nhà Cung Cấp</a> 
-      <a class="btn btn-info-gradien" href="{{URL::to('/api/order')}}">Hóa Đơn</a> 
-      <a class="btn btn-warning-gradien" href="{{URL::to('/api/order-detail')}}">Chi Tiết Hóa Đơn</a> 
-      <a class="btn btn-danger-gradien" href="{{URL::to('/api/article')}}">Bài Viết</a> 
-      <a class="btn btn-primary-gradien" href="{{URL::to('/api/account')}}">Tài Khoản</a> 
+      <a style="margin:10px" class="btn btn-primary-gradien" href="{{URL::to('/api/product')}}">Sản Phẩm</a> 
+      <a style="margin:10px" class="btn btn-secondary-gradien" href="{{URL::to('/api/category')}}">Danh Mục</a> 
+      <a style="margin:10px" class="btn btn-success-gradien" href="{{URL::to('/api/portfolio')}}">Nhà Cung Cấp</a> 
+      <a style="margin:10px" class="btn btn-info-gradien" href="{{URL::to('/api/order')}}">Hóa Đơn</a> 
+      <a style="margin:10px" class="btn btn-warning-gradien" href="{{URL::to('/api/order-detail')}}">Chi Tiết Hóa Đơn</a> 
+      <a style="margin:10px" class="btn btn-danger-gradien" href="{{URL::to('/api/article')}}">Bài Viết</a> 
+      <a style="margin:10px" class="btn btn-primary-gradien" href="{{URL::to('/api/account')}}">Tài Khoản</a>  
+      <a style="margin:10px" class="btn btn-success-gradien" href="{{URL::to('/api/show-product-by-portfolio/1')}}">Sản Phẩm theo Nhà Cung Cấp</a> 
+      <a style="margin:10px" class="btn btn-info-gradien" href="{{URL::to('/api/show-product-by-category/1')}}">Sản Phẩm theo Danh Mục</a> 
           </div></div>
   </div>
 </div>

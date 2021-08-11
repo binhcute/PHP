@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Order;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ServerController extends Controller
 {
@@ -21,11 +23,20 @@ class ServerController extends Controller
         $category = Category::all();
         $order = Order::all();
         $account = User::all();
+        $countProduct = DB::table('tpl_product')
+        ->select('user_id')
+        ->where('user_id', '=', Auth::user()->id)->get();
+        
+        $countArticle = DB::table('tpl_article')
+        ->select('user_id')
+        ->where('user_id', '=', Auth::user()->id)->get();
         return view('pages.server.index')
             ->with('product', $product)
             ->with('category', $category)
             ->with('order', $order)
-            ->with('account', $account);
+            ->with('account', $account)
+            ->with('countProduct', $countProduct)
+            ->with('countArticle', $countArticle);
     }
 
     public function api(){

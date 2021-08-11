@@ -18,7 +18,7 @@ class CommentController extends Controller
     public function index()
     {
         $cmt = DB::table('tpl_comment')
-            ->select('tpl_comment.*', 'users.firstName', 'users.lastName')
+            ->select('tpl_comment.*', 'users.firstName', 'users.lastName', 'users.username')
             ->join('users', 'users.id', '=', 'tpl_comment.user_id')->get();
         return view('pages.server.comment.list')
             ->with('cmt', $cmt);

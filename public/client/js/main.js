@@ -637,7 +637,7 @@
         Instagram Feed
     -----------------------------------*/
     $.instagramFeed({
-        'username': 'ecommerce.devitems',
+        'username': 'tbinh.h',
         'container': ".instagram-feed",
         'display_profile': false,
         'display_biography': false,

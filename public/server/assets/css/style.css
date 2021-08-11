@@ -49315,4 +49315,20 @@
     .box-layout .chart_data_right.second {
       display: none !important;
     }
+    .product-ratings {
+      line-height: 1;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 13px 0;
+  }
+  .product-ratings .ratings .checked {
+      color: #ffc700;
+  }
   }

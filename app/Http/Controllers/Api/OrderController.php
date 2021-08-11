@@ -53,7 +53,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        return $order->update($request->all());
+        $order->update($request->all());
+        return new OrderResource($order);
     }
 
     /**
@@ -65,5 +66,6 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
+        return response()->noContent();
     }
 }

@@ -3,7 +3,7 @@
 @section('title','Liên Hệ')
 
     <!-- Page Title/Header Start -->
-    <div class="page-title-section section" data-bg-image="assets/images/bg/page-title-1.jpg">
+    <div class="page-title-section section" data-bg-image="{{asset('client/images/bg/page-title-1.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -59,7 +59,7 @@
             <!-- Contact Map Start -->
             <div class="row learts-mt-60">
                 <div class="col">
-                    <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.986005919501!2d-73.9685579655238!3d40.75862446708152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258e4a1c884e5%3A0x24fe1071086b36d5!2sThe%20Atrium!5e0!3m2!1sen!2sbd!4v1585132512970!5m2!1sen!2sbd" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <iframe class="contact-map" src="https://www.google.com/maps/d/embed?mid=15XpeH6XtYA0nn0PP9xCwVFe7pfU" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
             </div>
             <!-- Contact Map End -->

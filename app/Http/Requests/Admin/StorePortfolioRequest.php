@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Article;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreArticleRequest extends FormRequest
+class StorePortfolioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,14 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'img' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'name' => 'required','max:100',
-            'description' =>'required','min:20','max:255',
-            'detail' =>'required','min:50'
+            'name' => 'required|max:100',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Tên nhà cung cấp không được bỏ trống',
+            'name.max' => 'Tên nhà cung cấp phải ít hơn 255 ký tự'
         ];
     }
 }

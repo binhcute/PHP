@@ -53,7 +53,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        return $product->update($request->all());
+        $product->update($request->all());
+        return new ProductResource($product);
     }
 
     /**
@@ -65,6 +66,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        return response()->noContent();
     }
 
     public function show_pro_by_cate($category)

@@ -52,7 +52,11 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, Portfolio $portfolio)
     {
-        return $portfolio->update($request->all());
+//         $data = $request->all();
+// dd($data);
+      $portfolio->update($request->all());
+
+      return new PortfolioResource($portfolio);
     }
 
     /**
@@ -64,5 +68,6 @@ class PortfolioController extends Controller
     public function destroy(Portfolio $portfolio)
     {
         $portfolio->delete();
+        return response()->noContent();
     }
 }

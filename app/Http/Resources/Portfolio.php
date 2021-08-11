@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Product;
 
 class Portfolio extends JsonResource
 {
@@ -22,9 +23,10 @@ class Portfolio extends JsonResource
             'port_img' => $this->port_img,
             'port_origin' => $this->port_origin,
             'port_description' => $this->port_description,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'status' => $this->status
+            'created_at' => (string)$this->created_at,
+            'updated_at' => (string)$this->updated_at,
+            'status' => $this->status,
+            'products' => Product::collection($this->whenLoaded('products'))
         ];
     }
 }

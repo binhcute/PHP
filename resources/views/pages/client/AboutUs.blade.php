@@ -3,16 +3,16 @@
 @section('title','Về Chúng Tôi')
 
     <!-- Page Title/Header Start -->
-    <div class="page-title-section section" data-bg-image="assets/images/bg/page-title-1.jpg">
+    <div class="page-title-section section" data-bg-image="{{asset('client/images/bg/page-title-1.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col">
 
                     <div class="page-title">
-                        <h1 class="title">About us 02</h1>
+                        <h1 class="title">Về Chúng Tôi</h1>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                            <li class="breadcrumb-item active">About us 02</li>
+                            <li class="breadcrumb-item active">Về Chúng Tôi</li>
                         </ul>
                     </div>
 
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 learts-mb-30">
-                    <img src="assets/images/about/about-6.jpg" alt="">
+                    <img src="{{asset('client/images/about/about-6.jpg')}}" alt="">
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <div class="row learts-mb-n30">
 
                 <div class="col-lg-6 col-12 text-center learts-mb-30">
-                    <img src="assets/images/about/about-7.jpg" alt="">
+                    <img src="{{asset('client/images/about/about-7.jpg')}}" alt="">
                 </div>
 
                 <div class="col-lg-6 col-12 align-self-center learts-mb-30">
@@ -99,11 +99,11 @@
 
     <!-- Video Banner Section Start -->
     <div class="section">
-        <div class="video-banner" data-bg-image="assets/images/banner/video/video-banner-1.jpg">
+        <div class="video-banner" data-bg-image="{{asset('client/images/banner/video/video-banner-1.jpg')}}">
             <div class="content">
                 <h2 class="title">LITTLE <span>SIMPLE</span> THINGS</h2>
                 <a href="https://www.youtube.com/watch?v=1jSsy7DtYgc" class="video-popup">
-                    <img src="assets/images/icons/button-play.png" alt="">
+                    <img src="{{asset('client/images/icons/button-play.png')}}" alt="">
                 </a>
             </div>
         </div>
@@ -130,7 +130,7 @@
                     <div class="testimonial">
                         <p>There's nothing would satisfy me much more than a worry-free clean and responsive theme for my high-traffic site.</p>
                         <div class="author">
-                            <img src="assets/images/testimonial/testimonial-1.png" alt="">
+                            <img src="{{asset('client/images/testimonial/testimonial-1.png')}}" alt="">
                             <div class="content">
                                 <h6 class="name">Anais Coulon</h6>
                                 <span class="title">Actor</span>
@@ -142,7 +142,7 @@
                     <div class="testimonial">
                         <p>Really good design/documentation, pretty much everything is nicely setup. The best choice for Woocommerce shop.</p>
                         <div class="author">
-                            <img src="assets/images/testimonial/testimonial-2.png" alt="">
+                            <img src="{{asset('client/images/testimonial/testimonial-2.png')}}" alt="">
                             <div class="content">
                                 <h6 class="name">Ian Schneider</h6>
                                 <span class="title">Actor</span>
@@ -154,7 +154,7 @@
                     <div class="testimonial">
                         <p>ThemeMove deserves 5 star for theme’s features, design quality, flexibility, customizability and support service!</p>
                         <div class="author">
-                            <img src="assets/images/testimonial/testimonial-3.png" alt="">
+                            <img src="{{asset('client/images/testimonial/testimonial-3.png')}}" alt="">
                             <div class="content">
                                 <h6 class="name">Florence Polla</h6>
                                 <span class="title">Customer</span>
@@ -166,7 +166,7 @@
                     <div class="testimonial">
                         <p>Thanks for always keeping your WordPress themes up to date. Your level of support is second to none.</p>
                         <div class="author">
-                            <img src="assets/images/testimonial/testimonial-4.png" alt="">
+                            <img src="{{asset('client/images/testimonial/testimonial-4.png')}}" alt="">
                             <div class="content">
                                 <h6 class="name">Sally Ramsey</h6>
                                 <span class="title">Reporter</span>
@@ -186,7 +186,7 @@
             <div class="row row-cols-lg-2 row-cols-1 learts-mb-n50">
 
                 <div class="col align-self-center learts-mb-50 order-lg-2">
-                    <div class="section-title3 text-center m-0" data-bg-image="assets/images/title/title-3.png">
+                    <div class="section-title3 text-center m-0" data-bg-image="{{asset('client/images/title/title-3.png')}}">
                         <h2 class="title">@leArts_store941</h2>
                         <p class="desc">Follow us on Instagram</p>
                     </div>

@@ -7,7 +7,7 @@ use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\Article\StoreArticleRequest;
+use App\Http\Requests\Admin\StoreArticleRequest;
 
 
 
@@ -50,16 +50,16 @@ class ArticleController extends Controller
         $article->article_detail = $request->detail;
         $article->article_keyword = $request->keyword;
         $files = $request->file('img');
-        
-       // Define upload path
-           $destinationPath = public_path('/server/assets/image/article'); // upload path
+
+        // Define upload path
+        $destinationPath = public_path('/server/assets/image/article'); // upload path
         // Upload Original Image           
-           $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-           $files->move($destinationPath, $profileImage);
- 
-           $insert['img'] = "$profileImage";
+        $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+        $files->move($destinationPath, $profileImage);
+
+        $insert['img'] = "$profileImage";
         // Save In Database
-		$article->article_img="$profileImage";
+        $article->article_img = "$profileImage";
         $article->status = $request->status;
         $article->save();
         Session::put('message', 'Thêm Bài Viết Thành Công');
@@ -89,10 +89,10 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        
+
         $article = article::find($id);
         return view('pages.server.article.edit')
-        ->with('article', $article);
+            ->with('article', $article);
     }
 
     /**
@@ -112,15 +112,15 @@ class ArticleController extends Controller
         $article->article_keyword = $request->keyword;
         $files = $request->file('img');
         if ($files != NULL) {
-       // Define upload path
-           $destinationPath = public_path('/server/assets/image/article'); // upload path
-        // Upload Original Image           
-           $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-           $files->move($destinationPath, $profileImage);
- 
-           $insert['img'] = "$profileImage";
-        // Save In Database
-		$article->article_img="$profileImage";
+            // Define upload path
+            $destinationPath = public_path('/server/assets/image/article'); // upload path
+            // Upload Original Image           
+            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $profileImage);
+
+            $insert['img'] = "$profileImage";
+            // Save In Database
+            $article->article_img = "$profileImage";
         }
         $article->save();
         Session::put('message', 'Cập Nhật Bài ViếtThành Công');
@@ -146,31 +146,31 @@ class ArticleController extends Controller
         $article = article::find($id);
         $article->status = 0;
         $article->save();
-        if($article->save()){
+        if ($article->save()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Ẩn Bài Viết Thành Công'
-            ],200);
+            ], 200);
         }
         return response()->json([
             'status' => 'error',
             'message' => 'Đã Ẩn Bài Viết Thất Bại'
-        ],200);
+        ], 200);
     }
     public function enabled($id)
     {
         $article = article::find($id);
-        $article->status = 1 ;
+        $article->status = 1;
         $article->save();
-        if($article->save()){
+        if ($article->save()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Hiển Thị Bài Viết Thành Công'
-            ],200);
+            ], 200);
         }
         return response()->json([
             'status' => 'error',
             'message' => 'Hiển Thị Bài Viết Thất Bại'
-        ],200);
+        ], 200);
     }
 }

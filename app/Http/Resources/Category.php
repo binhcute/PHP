@@ -20,8 +20,8 @@ class Category extends JsonResource
             'cate_name' => $this->cate_name,
             'cate_img' => $this->cate_img,
             'cate_description' => $this->cate_description,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => (string)$this->created_at,
+            'updated_at' => (string)$this->updated_at,
             'status' => $this->status,
             'view' => $this->view
         ];

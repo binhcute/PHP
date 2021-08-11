@@ -26,8 +26,8 @@ class Account extends JsonResource
             'email' => $this->email,
             'password' => $this->password,
             'level' => $this->level,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => (string)$this->created_at,
+            'updated_at' => (string)$this->updated_at,
             'status' => $this->status
         ];
     }

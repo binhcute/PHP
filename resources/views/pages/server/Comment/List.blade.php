@@ -16,30 +16,6 @@
       </div>
     </div>
   </div>
-  @if ($message = Session::get('message'))
-  <div class="alert alert-success alert-block">
-    <strong>{{ $message }}</strong>
-    <?php
-    Session::put('message', null);
-    ?>
-  </div>
-  @endif
-  @if ($destroy = Session::get('destroy'))
-  <div class="alert alert-danger alert-block">
-    <strong>{{ $destroy }}</strong>
-    <?php
-    Session::put('destroy', null);
-    ?>
-  </div>
-  @endif
-  @if ($info = Session::get('info'))
-  <div class="alert alert-primary alert-block">
-    <strong>{{ $info }}</strong>
-    <?php
-    Session::put('info', null);
-    ?>
-  </div>
-  @endif
   <div class="card">
     @if(count($cmt)!= 0)
     <div class="card-body">
@@ -48,8 +24,8 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Tên</th>
-              <th scope="col">Hình Ảnh</th>
+              <th scope="col">Họ Tên(Tài Khoản)</th>
+              <th scope="col">ID tương tác</th>
               <th scope="col">Nội Dung</th>
               <th scope="col">Trạng Thái</th>
               <th scope="col">Tác Vụ</th>
@@ -59,7 +35,7 @@
             @foreach($cmt as $item)
             <tr>
               <th scope="row">{{ $item->comment_id }}</th>
-              <td>{{ $item->firstName}} {{ $item->lastName}}</td>
+              <td>{{ $item->firstName}} {{ $item->lastName}} <strong>({{$item->username}})</strong></td>
               <td>
                 @if($item->role == 1)
                 Sản Phẩm Số {{$item->product_id}}
@@ -69,7 +45,49 @@
               </td>
               <td class="flex-column align-items-center justify-content-around">
                 @if($item->role == 1)
-                <p>{{$item->rate}}</p>
+                <p>
+                <div class="product-ratings">
+                  <div class="ratings">
+                    @switch($item->rate)
+                    @case(1)
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    @break
+                    @case(2)
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    @break
+                    @case(3)
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    @break
+                    @case('4.0')
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    @break
+                    @case(5)
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    @break
+                    @endswitch
+                  </div>
+                </div>
+                </p>
                 <p>{!!$item->comment_description!!}</p>
                 @else
                 <p>{!!$item->comment_description!!}</p>
@@ -77,9 +95,9 @@
               </td>
               <td>
                 @if($item->status==1)
-                  <p>Đang hiển thị</p>
+                <p><strong style="color:blue">Đang hiển thị</strong></p>
                 @else
-                  <p>Đang ẩn</p>
+                <p><strong style="color:darkgoldenrod">Đang ẩn</strong></p>
                 @endif
               </td>
               <td class="d-flex align-items-center justify-content-around">
@@ -108,8 +126,8 @@
           <tfoot>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Tên</th>
-              <th scope="col">Hình Ảnh</th>
+              <th scope="col">Họ Tên(Tài Khoản)</th>
+              <th scope="col">ID tương tác</th>
               <th scope="col">Nội Dung</th>
               <th scope="col">Trạng Thái</th>
               <th scope="col">Tác Vụ</th>

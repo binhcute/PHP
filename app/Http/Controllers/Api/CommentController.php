@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Category as CategoryResource;
+use App\Http\Resources\Comment as CommentResource;
 
-class CategoryController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        return CategoryResource::collection($category);
+        $comment = Comment::all();
+        return CommentResource::collection($comment);
     }
 
     /**
@@ -28,43 +28,43 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
-        return new CategoryResource($category);
+        $comment = Comment::create($request->all());
+        return new CommentResource($comment);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Comment $comment)
     {
-        return new CategoryResource($category);
+        return new CommentResource($comment);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Comment $comment)
     {
-        $category->update($request->all());
-        return new CategoryResource($category);
+        $comment -> update($request->all());
+        return new CommentResource($comment);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Comment $comment)
     {
-        $category->delete();
+        $comment->delete();
         return response()->noContent();
     }
 }

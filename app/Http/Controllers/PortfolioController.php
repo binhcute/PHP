@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Alert;
+use App\Http\Requests\Admin\StorePortfolioRequest;
 
 class PortfolioController extends Controller
 {
@@ -40,11 +41,8 @@ class PortfolioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePortfolioRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'max:255']
-        ]);
         $port = new Portfolio();
         $port->user_id = Auth::user()->id;
         $port->port_name = $request->name;
@@ -141,8 +139,8 @@ class PortfolioController extends Controller
             // Save In Database
             $port->port_img = "$profileImage";
         }
-        $files = $request->file('img');
 
+        $files = $request->file('img');
         if ($files != NULL) {
             // Define upload path
             $destinationPath = public_path('/server/assets/image/portfolio'); // upload path

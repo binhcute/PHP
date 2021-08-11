@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-class Cart
+class Favorite
 {
     public $product = null;
     public $totalPrice = 0;
     public $totalQuantity = 0;
 
-    public function __construct($cart)
+    public function __construct($favorite)
     {
-        if ($cart) {
-            $this->product = $cart->product;
-            $this->totalPrice = $cart->totalPrice;
-            $this->totalQuantity = $cart->totalQuantity;
+        if ($favorite) {
+            $this->product = $favorite->product;
+            $this->totalPrice = $favorite->totalPrice;
+            $this->totalQuantity = $favorite->totalQuantity;
         }
     }
-    public function AddCart($product, $id)
+    public function AddFavorite($product, $id)
     {
         $new_product = ['qty' => 0, 'price' => $product->product_price, 'product_info' => $product];
         if ($this->product) {
@@ -29,31 +29,16 @@ class Cart
         $this->product[$id] = $new_product;
         $this->totalQuantity++;
         $this->totalPrice += $product->product_price;
-    }
+    }   
 
-    public function AddCartDT($product, $id, $qty)
-    {
-        $new_product = ['qty' => $qty, 'price' => $product->product_price, 'product_info' => $product];
-        if ($this->product) {
-            if (array_key_exists($id, $this->product)) {
-                $new_product = $this->product[$id];
-            }
-        }
-        $new_product['qty'] = $qty;
-        $new_product['price'] = $new_product['qty'] * $product->product_price;
-        $this->product[$id] = $new_product;
-        $this->totalQuantity = $this->product[$id]['qty'];
-        $this->totalPrice = $this->product[$id]['qty']*$product->product_price;
-    }
-
-    public function DeleteItemCart($id)
+    public function DeleteItemFavorite($id)
     {
         $this->totalQuantity -= $this->product[$id]['qty'];
         $this->totalPrice -= $this->product[$id]['price'];
         unset($this->product[$id]);
     }
     
-    public function SaveItemListCart($id,$qty){
+    public function PushCart($id){
         $this->totalQuantity -= $this->product[$id]['qty'];
         $this->totalPrice -= $this->product[$id]['price'];
 

@@ -135,17 +135,14 @@
                     <h6>Manager</h6>
                 </div>
                 <div class="card-footer row">
-                    <div class="col-4 col-sm-4">
-                        <h6>Cấp Bậc Tài Khoản</h6>
-                        <h3 class="counter">9564</h3>
-                    </div>
-                    <div class="col-4 col-sm-4">
+                   
+                    <div class="col-6 col-sm-6">
                         <h6>Bài Viết Đã Đăng</h6>
-                        <h3><span class="counter">49</span>K</h3>
+                        <h5><span class="counter">{{count($countArticle)}}</span> Bài Viết</h5>
                     </div>
-                    <div class="col-4 col-sm-4">
+                    <div class="col-6 col-sm-6">
                         <h6>Sản Phẩm Đã Đăng</h6>
-                        <h3><span class="counter">96</span>M</h3>
+                        <h5><span class="counter">{{count($countProduct)}}</span> Sản Phẩm</h5>
                     </div>
                 </div>
             </div>
@@ -171,7 +168,7 @@
                                 <tbody>
                                   <tr>
                                     <td>
-                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="../assets/images/avtar/7.jpg" alt="">
+                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{asset('server/assets/images/avtar/7.jpg')}}" alt="">
                                         <div class="status-circle bg-primary"></div>
                                         <div class="d-inline-block"><span>John keter</span>
                                           <p class="font-roboto">2019</p>
@@ -186,7 +183,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="../assets/images/avtar/4.jpg" alt="">
+                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{asset('server/assets/images/avtar/4.jpg')}}" alt="">
                                         <div class="status-circle bg-primary"></div>
                                         <div class="d-inline-block"><span>Herry Venter</span>
                                           <p class="font-roboto">2020</p>
@@ -201,7 +198,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="../assets/images/avtar/16.jpg" alt="">
+                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{asset('server/assets/images/avtar/16.jpg')}}" alt="">
                                         <div class="status-circle bg-primary"></div>
                                         <div class="d-inline-block"><span>loain deo</span>
                                           <p class="font-roboto">2020</p>
@@ -216,7 +213,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="../assets/images/avtar/11.jpg" alt="">
+                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{asset('server/assets/images/avtar/11.jpg')}}" alt="">
                                         <div class="status-circle bg-primary"></div>
                                         <div class="d-inline-block"><span>Horen Hors</span>
                                           <p class="font-roboto">2020</p>
@@ -231,7 +228,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="../assets/images/avtar/3.jpg" alt="">
+                                      <div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{asset('server/assets/images/avtar/3.jpg')}}" alt="">
                                         <div class="status-circle bg-primary"></div>
                                         <div class="d-inline-block"><span>fenter Jessy</span>
                                           <p class="font-roboto">2021</p>

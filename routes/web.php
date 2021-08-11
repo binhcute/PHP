@@ -35,10 +35,6 @@ Route::group(['middleware' => 'levellogin'],function(){
     Route::put('/HoaDon/xuly/{HoaDon}','OrderController@update_status_1');
     Route::put('/HoaDon/thanhcong/{HoaDon}','OrderController@update_status_2');
     Route::put('/HoaDon/huy/{HoaDon}','OrderController@update_status_3');
-    //OrderDetail
-    Route::resource('/ChiTietHoaDon','OrderDetailController');
-    Route::put('/ChiTietHoaDon/disabled/{ChiTietHoaDon}','OrderDetailController@disabled');
-    Route::put('/ChiTietHoaDon/enabled/{ChiTietHoaDon}','OrderDetailController@enabled');
     //Portfolio
     Route::resource('/NhaCungCap','PortfolioController');
     Route::get('/XoaNhaCungCap/{NhaCungCap}','PortfolioController@destroy');
@@ -48,10 +44,6 @@ Route::group(['middleware' => 'levellogin'],function(){
     Route::resource('/BinhLuan','CommentController')->except('store');
     Route::put('/BinhLuan/disabled/{BinhLuan}','CommentController@disabled');
     Route::put('/BinhLuan/enabled/{BinhLuan}','CommentController@enabled');
-    // //Favorite
-    // Route::resource('/YeuThich','FavoriteController');
-    // Route::put('/YeuThich/disabled/{YeuThich}','FavoriteController@disabled');
-    // Route::put('/YeuThich/enabled/{YeuThich}','FavoriteController@enabled');
     //Account
     Route::resource('/TaiKhoan','AccountController');
     Route::put('/TaiKhoan/disabled/{TaiKhoan}','AccountController@disabled');
@@ -85,10 +77,8 @@ Route::resource('/BinhLuan','CommentController')->only('store');
 Route::resource('/','ClientController');
 
 Route::get('/about_us','ClientController@about_us');
-Route::get('/cart','ClientController@cart');
 Route::get('/checkout','ClientController@check_out');
 Route::get('/contact_us','ClientController@contact_us');
-Route::get('/favorite','ClientController@favorite');
 Route::get('/account','ClientController@my_account');
 
 //Brand
@@ -107,12 +97,23 @@ Route::get('/product/{product}','ClientController@product_detail');
 Route::get('/article/{article_detail}','ClientController@article_detail');
 Route::get('/article','ClientController@article');
 
-
+//Update Account
+Route::resource('/TaiKhoan','AccountController')->only('update');
 
 //Cart
 Route::resource('/cart','CartController');
 Route::get('/item-cart/{id}','CartController@AddCart');
-Route::get('/item-cart-dt/{id}/{qty}','CartController@AddCartDT');
+Route::get('product/item-cart/{id}/{qty}','CartController@AddCartDT');
 Route::get('/delete-item-cart/{id}','CartController@DeleteItemCart');
 Route::get('/delete-item-list-cart/{id}','CartController@DeleteItemListCart');
 Route::get('/save-item-list-cart/{id}/{qty}','CartController@SaveItemListCart');
+// Route::post('/AddCartDT/{id}','CartController@AddCartDT');
+
+
+//Favỏite
+Route::resource('/favorite','FavoriteController');
+Route::get('/item-favorite/{id}','FavoriteController@AddFavorite');
+Route::get('/item-favorite-dt/{id}/{qty}','FavoriteController@AddFavoriteDT');
+Route::get('/delete-item-favorite/{id}','FavoriteController@DeleteItemFavorite');
+Route::get('/delete-item-list-favorite/{id}','FavoriteController@DeleteItemListFavorite');
+Route::get('/save-item-list-favorite/{id}/{qty}','FavoriteController@SaveItemListFavorite');

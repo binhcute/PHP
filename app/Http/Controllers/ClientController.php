@@ -93,7 +93,7 @@ class ClientController extends Controller
 
     public function article()
     {
-        $article = Article::where('status',1)->paginate(6);
+        $article = DB::table('tpl_article')->where('status', 1)->orderBy('created_at', 'desc')->paginate(6);
         $product_cate = DB::select('select * from tpl_category where status = ?', [1]);
         return view('pages.client.articlelist')
             ->with('article', $article)

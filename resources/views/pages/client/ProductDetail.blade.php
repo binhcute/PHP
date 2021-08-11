@@ -129,7 +129,8 @@
                             <a href="#"><img src="{{URL::to('/') }}/server/assets/image/portfolio/avatar/{{$product_detail->port_avatar}}" alt=""></a>
                         </div>
                     </div>
-
+                    <form action="{{URL('/AddCartDT/'.$product_detail->product_id)}}" method="get" enctype="multipart/form-data">
+                        @csrf
                         <div class="product-variations">
                             <table>
                                 <tbody>
@@ -138,7 +139,7 @@
                                         <td class="value">
                                             <div class="product-quantity">
                                                 <span class="qty-btn minus"><i class="ti-minus"></i></span>
-                                                <input type="text" class="input-qty" id="qty-{{$product_detail->product_id}}" value="1">
+                                                <input type="text" class="input-qty" id="qty" name="qty" value="1">
                                                 <span class="qty-btn plus"><i class="ti-plus"></i></span>
                                             </div>
                                         </td>
@@ -151,6 +152,7 @@
                             <button type="button" onclick="AddCartDT({{$product_detail->product_id}})" class="btn btn-dark btn-hover-primary"><i class="fal fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
                             <a onclick="updateProduct()" class="btn btn-icon btn-outline-body btn-hover-dark hintT-top" data-hint="Compare"><i class="fal fa-random"></i></a>
                         </div>
+                    </form>
                     <br>
                     <div class="product-meta">
                         <table>
@@ -340,7 +342,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="product_id" value="{{ $product_detail->product_id }}">
-                                <input type="hidden" name="role"  value="1">
+                                <input type="hidden" name="role" value="1">
                                 <div class="col-12 learts-mb-30">
                                     <textarea name="comment_description" id="ckeditor1" placeholder="Bình luận của bạn *"></textarea>
                                 </div>
@@ -411,17 +413,22 @@
 </div>
 <!-- Recommended Products Section End -->
 <script type="text/javascript">
-function AddCartDT(id){
-        console.log($("#qty-" + id).val());
-        //     $.ajax({
-        //         url: 'item-cart-dt/' + id,
-        //         type: "GET",
-        //     }).done(function(response) {
-        //         console.log(response);
-        //         Render(response);
-        //         alertify.success('Đã Thêm Vào Giỏ Hàng');
-        //     });
+    function AddCartDT(id) {
+        console.log(id);
+        console.log($("#qty").val());
+            $.ajax({
+                url: 'item-cart/' + id + '/' + $("#qty").val(),
+                type: "GET",
+            }).done(function(response) {
+                console.log(response);
+                Render(response);
+                alertify.success('Đã Thêm Vào Giỏ Hàng');
+            });
+        }
+        // function Render(response) {
+        //     $("#change-items").empty();
+        //     $("#change-items").html(response);
+        //     $("#total-qty-show").text($("#qty").val());
         // }
-}
-</script>
+</script>\
 @endsection

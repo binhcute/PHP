@@ -22,8 +22,8 @@ class Article extends JsonResource
             'article_img' => $this->article_img,
             'article_detail' => $this->article_detail,
             'article_keyword' => $this->article_keyword,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => (string)$this->created_at,
+            'updated_at' => (string)$this->updated_at,
             'status' => $this->status,
             'view' => $this->view
         ];

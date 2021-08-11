@@ -101,7 +101,12 @@
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
                         </div>
                         <div class="header-wishlist">
-                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
+
+                            @if(Session::has("Favorite")!= null)
+                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            @else
+                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            @endif
                         </div>
                         <div class="header-cart">
 
@@ -184,7 +189,11 @@
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
                         </div>
                         <div class="header-wishlist">
-                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
+                            @if(Session::has("Favorite")!= null)
+                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            @else
+                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            @endif
                         </div>
                         <div class="header-cart">
                             @if(Session::has("Cart") !=null)
@@ -234,7 +243,11 @@
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
                         </div>
                         <div class="header-wishlist d-none d-sm-block">
-                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
+                            @if(Session::has("Favorite")!= null)
+                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            @else
+                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            @endif
                         </div>
                         <div class="header-cart">
                             @if(Session::has("Cart") !=null)
@@ -284,7 +297,11 @@
                             <a href="#offcanvas-search" class="offcanvas-toggle"><i class="fal fa-search"></i></a>
                         </div>
                         <div class="header-wishlist d-none d-sm-block">
-                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span class="wishlist-count">3</span><i class="fal fa-heart"></i></a>
+                            @if(Session::has("Favorite")!= null)
+                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            @else
+                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            @endif
                         </div>
                         <div class="header-cart">
                             @if(Session::has("Cart") !=null)
@@ -386,39 +403,32 @@
 
     <!-- OffCanvas Wishlist Start -->
     <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
-        <div class="inner">
+        <div class="inner" id="change-item">
             <div class="head">
                 <span class="title">Yêu Thích</span>
                 <button class="offcanvas-close">×</button>
             </div>
+            @if(Session::has("Favorite") != null)
             <div class="body customScroll">
                 <ul class="minicart-product-list">
+                    @foreach(Session::get('Favorite')->product as $item)
                     <li>
-                        <a href="product-details.html" class="image"><img src="{{asset('client/images/product/cart-product-1.jpg')}}" alt="Cart product Image"></a>
+                        <a href="product-details.html" class="image"><img src="{{URL::to('/')}}/server/assets/image/product/{{$item['product_info']->product_img}}" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="product-details.html" class="title">Walnut Cutting Board</a>
-                            <span class="quantity-price">1 x <span class="amount">$100.00</span></span>
-                            <a href="#" class="remove">×</a>
+                            <a href="product-details.html" class="title">{{$item['product_info']->product_name}}</a>
+                            <span class="quantity-price">{{$item['qty']}} x <span class="amount">{{number_format($item['product_info']->product_price).' '.'VND'}}</span></span>
+                            <i class="fa fa-times remove" data-id="{{$item['product_info']->product_id}}"></i>
                         </div>
                     </li>
-                    <li>
-                        <a href="product-details.html" class="image"><img src="{{asset('client/images/product/cart-product-2.jpg')}}" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Lucky Wooden Elephant</a>
-                            <span class="quantity-price">1 x <span class="amount">$35.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-details.html" class="image"><img src="{{asset('client/images/product/cart-product-3.jpg')}}" alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="product-details.html" class="title">Fish Cut Out Set</a>
-                            <span class="quantity-price">1 x <span class="amount">$9.00</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
+            @endif
+            @if(Session::has("Cart") == null)
+            <div class="body customScroll">
+                <strong>Giỏ Hàng trống</strong>
+            </div>
+            @endif
             <div class="foot">
                 <div class="buttons">
                     <a href="{{URL::to('/favorite')}}" class="btn btn-dark btn-hover-primary">Xem Danh Sách</a>
@@ -426,11 +436,12 @@
             </div>
         </div>
     </div>
+    </div>
     <!-- OffCanvas Wishlist End -->
 
     <!-- OffCanvas Cart Start -->
     <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-        <div class="inner"  id="change-items">
+        <div class="inner" id="change-items">
             <div class="head">
                 <span class="title">Giỏ Hàng</span>
                 <button class="offcanvas-close">×</button>
@@ -480,7 +491,6 @@
         </div>
     </div>
     <!-- OffCanvas Cart End -->
-
     <!-- OffCanvas Search Start -->
     <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
         <div class="inner customScroll">
@@ -517,13 +527,17 @@
                         @endif
                     </div>
                     <div class="header-wishlist">
-                        <a href="wishlist.html"><span>3</span><i class="fal fa-heart"></i></a>
+                        @if(Session::has("Favorite")!= null)
+                        <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                        @else
+                        <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                        @endif
                     </div>
                     <div class="header-cart">
                         @if(Session::has("Cart") !=null)
-                        <a href="shopping-cart.html"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
+                        <a href="{{URL::to('/cart')}}"><span id="total-qty-show" class="cart-count">{{Session::get("Cart")->totalQuantity}}</span><i class="fal fa-shopping-cart"></i></a>
                         @else
-                        <a href="shopping-cart.html"><i class="fal fa-shopping-cart"></i></a>
+                        <a href="{{URL::to('/cart')}}"><i class="fal fa-shopping-cart"></i></a>
                         @endif
                     </div>
                 </div>
@@ -563,7 +577,7 @@
                     <ul class="widget-menu justify-content-center">
                         <li><a href="{{URL::to('/about_us')}}">Về chúng tôi</a></li>
                         <li><a href="#">Địa chỉ</a></li>
-                        <li><a href="{{URL::to('/LienHe')}}">Liên hệ</a></li>
+                        <li><a href="{{URL::to('/contact_us')}}">Liên hệ</a></li>
                         <li><a href="#">Hỗ trợ</a></li>
                         <li><a href="#">Policy</a></li>
                         <li><a href="#">FAQs</a></li>
@@ -733,7 +747,6 @@
 <script src="{{asset('client/js/plugins/swiper.min.js')}}"></script>
 <script src="{{asset('client/js/plugins/slick.min.js')}}"></script>
 <script src="{{asset('client/js/plugins/mo.min.js')}}"></script>
-<script src="{{asset('client/js/plugins/jquery.instagramFeed.min.js')}}"></script>
 <script src="{{asset('client/js/plugins/jquery.ajaxchimp.min.js')}}"></script>
 <script src="{{asset('client/js/plugins/jquery.countdown.min.js')}}"></script>
 <script src="{{asset('client/js/plugins/imagesloaded.pkgd.min.js')}}"></script>
@@ -750,6 +763,7 @@
 <script src="{{asset('client/js/plugins/jquery.scrollUp.min.js')}}"></script>
 <script src="{{asset('client/js/plugins/scrollax.min.js')}}"></script> -->
 
+    <script src="{{asset('client/js/plugins/jquery.instagramFeed.min.js')}}"></script>
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <script src="{{URL::asset('ckeditor/ckeditor.js')}}"></script>
     <script src="{{URL::asset('ckeditor/ckfinder/ckfinder.js')}}"></script>
@@ -792,6 +806,36 @@
             $("#change-items").html(response);
             $("#total-qty-show").text($("#total-qty").val());
         }
+
+        function AddFavorite(id) {
+            console.log(id);
+            $.ajax({
+                url: 'item-favorite/' + id,
+                type: "GET",
+            }).done(function(response) {
+                console.log(response);
+                Render1(response);
+                alertify.success('Đã Thêm Vào Yêu Thích');
+            });
+        }
+        $("#change-item").on("click", ".content i", function() {
+            console.log($(this).data("id"));
+
+            $.ajax({
+                url: 'delete-item-favorite/' + $(this).data("id"),
+                type: "GET",
+            }).done(function(response) {
+                console.log(response);
+                Render1(response);
+                alertify.error('Đã Xóa Sản Phẩm Thành Công');
+            });
+        });
+
+        function Render1(response) {
+            $("#change-item").empty();
+            $("#change-item").html(response);
+            $("#total-qty-favorite").text($("#total-qty").val());
+        }
     </script>
 
 
@@ -807,7 +851,7 @@
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
 
-    
+
     <script src="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.js')}}"></script>
 
     @yield('page-js')

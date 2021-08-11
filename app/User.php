@@ -10,6 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+    //Khóa chính tự động tăng int
+    protected $primaryKey = 'id';
+
+    //Kết nối CSDL
+    protected $connection = 'mysql';
+
     /**
      * The attributes that are mass assignable.
      *

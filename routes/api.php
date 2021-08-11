@@ -24,6 +24,7 @@ Route::apiResource('article', 'Api\ArticleController');
 Route::apiResource('order', 'Api\OrderController');
 Route::apiResource('order-detail', 'Api\OrderDetailController');
 Route::apiResource('account', 'Api\AccountController');
+Route::apiResource('comment', 'Api\CommentController');
 
 Route::get('show-product-by-category/{category}','Api\ProductController@show_pro_by_cate');
 Route::get('show-product-by-portfolio/{portfolio}','Api\ProductController@show_pro_by_port');

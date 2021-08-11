@@ -1,30 +1,4 @@
-@extends('layout_client')
-@section('content')
-@section('title','Yêu Thích')
-
-<!-- Page Title/Header Start -->
-<div class="page-title-section section" data-bg-image="{{asset('client/images/bg/page-title-1.jpg')}}">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-
-                <div class="page-title">
-                    <h1 class="title">Wishlist</h1>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Wishlist</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Page Title/Header End -->
-
-<!-- Wishlist Section Start -->
-<div class="section section-padding">
-    <div class="container" id="list-favorite">
+<div class="container" id="list-favorite">
         <form class="cart-form" action="#">
     @if(Session::has("Favorite") != null)
             <table class="cart-wishlist-table table">
@@ -43,7 +17,7 @@
                         <td class="name"> <a href="product-details.html">{{$item['product_info']->product_name}}</a></td>
                         <td class="price"><span>{{number_format($item['product_info']->product_price).' '.'VND'}}</span></td>
                         <td class="add-to-cart"><a href="#" class="btn btn-light btn-hover-dark"><i class="fal fa-shopping-cart mr-2"></i> Thêm vào giỏ hàng</a></td>
-                        <td><a onclick="DeleteItemListFavorite({{$item['product_info']->product_id}});"><i class="fas fa-trash-alt" style="color:crimson"></i></a></td>
+                        <td><a onclick="DeleteItemListCart({{$item['product_info']->product_id}});"><i class="fas fa-trash-alt" style="color:crimson"></i></a></td>
                     </tr>
                     <!-- <div onclick="addProduct('{$item->getId()}','{$item->getName()}','{$item->getPrice()}',this)">
 													<a class="btn-lienhe ml-3" style="cursor:pointer;">Thêm vào giỏ hàng </a>
@@ -64,26 +38,3 @@
             </div>
         </form>
     </div>
-
-</div>
-<!-- Wishlist Section End -->
-
-<script>
-    function DeleteItemListFavorite(id) {
-        console.log(id);
-        $.ajax({
-            url: 'delete-item-list-favorite/' + id,
-            type: "GET",
-        }).done(function(response) {
-            console.log(response);
-            RenderList(response);
-            alertify.error('Đã Xóa Sản Phẩm Thành Công');
-        });
-    }
-    function RenderList(response) {
-        $("#list-favorite").empty();
-        $("#list-favorite").html(response);
-    }
-</script>
-
-@endsection

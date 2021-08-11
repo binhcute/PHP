@@ -210,7 +210,7 @@
     <script src="{{URL::asset('server/assets/js/chart/apex-chart/stock-prices.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/notify/bootstrap-notify.min.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/dashboard/default.js')}}"></script>
-    <script src="{{URL::asset('server/assets/js/notify/index.js')}}"></script>
+    <!-- <script src="{{URL::asset('server/assets/js/notify/index.js')}}"></script> -->
     <script src="{{URL::asset('server/assets/js/datepicker/date-picker/datepicker.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
