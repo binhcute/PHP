@@ -96,7 +96,7 @@
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
-                  <li><a href="#"><i data-feather="user"></i><span>Tài khoản </span></a></li>
+                  <li><a href="{{route('MyAccount.index')}}"><i data-feather="user"></i><span>Tài khoản </span></a></li>
                   <li><a href="#"><i data-feather="settings"></i><span>Cài đặt</span></a></li>
                   <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Đăng xuất</span>
@@ -223,6 +223,14 @@
     <script src="{{URL::asset('server/assets/js/datatable/datatables/datatable.custom.js')}}"></script>
     <script src="{{URL::asset('server/assets/js/tooltip-init.js')}}"></script>
     <script src="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.js')}}"></script>
+    
+    <script src="{{URL::asset('server/assets/js/counter/jquery.waypoints.min.js')}}"></script>
+    <script src="{{URL::asset('server/assets/js/counter/jquery.counterup.min.js')}}"></script>
+    <script src="{{URL::asset('server/assets/js/counter/counter-custom.js')}}"></script>
+    <script src="{{URL::asset('server/assets/js/photoswipe/photoswipe.min.js')}}"></script>
+    <script src="{{URL::asset('server/assets/js/photoswipe/photoswipe-ui-default.min.js')}}"></script>
+    <script src="{{URL::asset('server/assets/js/photoswipe/photoswipe.js')}}"></script>
+    <script src="{{URL::asset('server/assets/js/tooltip-init.js')}}"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{URL::asset('server/assets/js/script.js')}}"></script>

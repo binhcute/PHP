@@ -14,6 +14,7 @@
 Route::group(['middleware' => 'levellogin'],function(){
     //Server
     Route::resource('/admin','ServerController');
+    Route::resource('/MyAccount','MyAccountController');
     //Product
     Route::resource('/SanPham','ProductController');
     Route::get('/XoaSanPham/{SanPham}','ProductController@destroy');
