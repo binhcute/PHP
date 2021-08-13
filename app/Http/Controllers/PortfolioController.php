@@ -52,29 +52,29 @@ class PortfolioController extends Controller
         $files = $request->file('avatar');
 
         if ($files != NULL) {
-        // Define upload path
-        $destinationPath = public_path('/server/assets/image/portfolio/avatar'); // upload path
-        // Upload Original Image           
-        $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-        $files->move($destinationPath, $profileImage);
+            // Define upload path
+            $destinationPath = public_path('/server/assets/image/portfolio/avatar'); // upload path
+            // Upload Original Image           
+            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $profileImage);
 
-        $insert['avatar'] = "$profileImage";
-        // Save In Database
-        $port->port_avatar = "$profileImage";
+            $insert['avatar'] = "$profileImage";
+            // Save In Database
+            $port->port_avatar = "$profileImage";
         }
 
         $files = $request->file('img');
 
         if ($files != NULL) {
-        // Define upload path
-        $destinationPath = public_path('/server/assets/image/portfolio'); // upload path
-        // Upload Original Image           
-        $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-        $files->move($destinationPath, $profileImage);
+            // Define upload path
+            $destinationPath = public_path('/server/assets/image/portfolio'); // upload path
+            // Upload Original Image           
+            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $profileImage);
 
-        $insert['img'] = "$profileImage";
-        // Save In Database
-        $port->port_img = "$profileImage";
+            $insert['img'] = "$profileImage";
+            // Save In Database
+            $port->port_img = "$profileImage";
         }
         $port->save();
         Session::put('message', 'Thêm Nhà Cung Cấp Thành Công');
@@ -165,10 +165,27 @@ class PortfolioController extends Controller
      */
     public function destroy($id)
     {
+        $portfolio = DB::table('tpl_portfolio')
+            ->leftJoin('tpl_product', 'tpl_product.port_id', '=', 'tpl_portfolio.port_id')
+            ->where('tpl_portfolio,port_id', $id)
+            ->select(
+                'tpl_portfolio.*',
+                'tpl_product.product_id'
+            );
         $port = Portfolio::find($id);
-        $port->delete();
-        Session::put('destroy', 'Đã Xóa Nhà Cung Cấp');
-        return redirect()->route('NhaCungCap.index');
+        if ($portfolio->product_id == NULL) {
+            $port->delete();
+            Session::put('destroy', 'Đã Xóa Nhà Cung Cấp');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Xóa Nhà Cung Cấp Thành Công'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Xóa Nhà Cung Cấp Thất Bại'
+            ], 200);
+        }
     }
 
     public function disabled($id)
@@ -176,31 +193,31 @@ class PortfolioController extends Controller
         $port = Portfolio::find($id);
         $port->status = 0;
         $port->save();
-        if($port->save()){
+        if ($port->save()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Ẩn Nhà Cung Cấp Thành Công'
-            ],200);
+            ], 200);
         }
         return response()->json([
             'status' => 'error',
             'message' => 'Đã Ẩn Nhà Cung Cấp Thất Bại'
-        ],200);
+        ], 200);
     }
     public function enabled($id)
     {
         $port = Portfolio::find($id);
         $port->status = 1;
         $port->save();
-        if($port->save()){
+        if ($port->save()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Hiển Thị Nhà Cung Cấp Thành Công'
-            ],200);
+            ], 200);
         }
         return response()->json([
             'status' => 'error',
             'message' => 'Hiển Thị Nhà Cung Cấp Thất Bại'
-        ],200);
+        ], 200);
     }
 }

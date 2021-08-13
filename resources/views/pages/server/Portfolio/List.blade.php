@@ -57,15 +57,13 @@
               </td>
               <td class="flex-column align-items-center justify-content-around">
                 <a href="{{route('NhaCungCap.show',$item->port_id)}}" method="get">
-
                   <i class="icofont icofont-paper" style="font-size:20px;color:green"></i>
                 </a>
                 <a href="{{route('NhaCungCap.edit',$item->port_id)}}">
-
                   <i class="icofont icofont-pencil-alt-5" style="font-size:20px;color:blue"></i>
                 </a>
                 <a href="{{URL::to('/XoaNhaCungCap',$item->port_id)}}" class="delete-item">
-                  <input type="hidden" name="_token" value="{{csrf_token()}}">
+                  <meta name="csrf-token" content="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="delete">
                   <i class="icofont icofont-trash" style="font-size:20px;color:red"></i>
                 </a>
@@ -129,10 +127,53 @@
         }
       }
     });
-
   }
+
+  function deleteItem(event) {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form.serialize(),
+      success: function(data) {
+        if (data.status == 'error') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Thất Bại',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+        }
+        if (data.status == 'success') {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thành Công',
+            text: data.message,
+            showConfirmButton: true,
+            timer: 2500
+          })
+          window.setTimeout(function() {
+            window.location.reload();
+          }, 3000);
+        }
+      }
+    });
+  }
+
   $(function() {
     $(document).on('click', '.change_status_tri', changeStatus);
+    $(document).on('click', '.delete-item', deleteItem);
+
   });
 </script>
 @endsection

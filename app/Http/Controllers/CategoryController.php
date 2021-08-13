@@ -132,10 +132,22 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $cate = Category::find($id);
-        $cate->delete();
-        Session::put('detroy', 'Đã Xóa Loại Sản Phẩm');
-        return redirect()->route('LoaiSanPham.index');
+        $cate = DB::table('tpl_category')
+            ->where('tpl_category.cate_id', $id)
+            ->leftJoin('tpl_product', 'tpl_product.cate_id', '=', 'tpl_category.cate_id')
+            ->select(
+                'tpl_category.*',
+                'tpl_product.product_id'
+            )->first();
+        $category = Category::find($id);
+        if ($cate->product_id == NULL) {
+            $category->delete();
+            Session::put('destroy', 'Đã Xóa Loại Sản Phẩm');
+            return redirect()->route('LoaiSanPham.index');
+        } else {
+            Session::put('destroy', 'Chưa xóa hết sản phẩm trong loại sản phẩm này');
+            return redirect()->back();
+        }
     }
 
     public function disabled($id)
@@ -143,31 +155,31 @@ class CategoryController extends Controller
         $cate = Category::find($id);
         $cate->status = 0;
         $cate->save();
-        if($cate->save()){
+        if ($cate->save()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Ẩn Danh Mục Thành Công'
-            ],200);
+            ], 200);
         }
         return response()->json([
             'status' => 'error',
             'message' => 'Đã Ẩn Danh Mục Thất Bại'
-        ],200);
+        ], 200);
     }
     public function enabled($id)
     {
         $cate = Category::find($id);
         $cate->status = 1;
         $cate->save();
-        if($cate->save()){
+        if ($cate->save()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Hiển Thị Danh Mục Thành Công'
-            ],200);
+            ], 200);
         }
         return response()->json([
             'status' => 'error',
             'message' => 'Hiển Thị Danh Mục Thất Bại'
-        ],200);
+        ], 200);
     }
 }

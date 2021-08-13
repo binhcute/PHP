@@ -24,8 +24,8 @@
 <div class="section section-padding">
 
     <div class="container" id="list-cart">
-        
-    @if(Session::has("Cart") != null)
+
+        @if(Session::has("Cart") != null)
         <table class="cart-wishlist-table table">
             <thead>
                 <tr>
@@ -37,15 +37,7 @@
                     <th class="subtotal">Lưu</th>
                     <th class="remove">Xóa</th>
                 </tr>
-                <tr>
-                    <th class="avatar"></th>
-                    <th class="name"></th>
-                    <th class="price"></th>
-                    <th class="quantity"></th>
-                    <th class="subtotal"></th>
-                    <th class="subtotal"><i class="fas fa-cart-arrow-down" style="color:forestgreen"></i></th>
-                    <th class="remove"><i class="fas fa-trash-alt" style="color:crimson"></i></th>
-                </tr>
+
             </thead>
             <tbody>
                 @foreach(Session::get('Cart')->product as $item)
@@ -68,6 +60,15 @@
                 </tr>
                 @endforeach
             </tbody>
+            <tr>
+                <th class="avatar"></th>
+                <th class="name"></th>
+                <th class="price"></th>
+                <th class="quantity">{{Session::get("Cart")->totalQuantity}} Sản Phẩm</th>
+                <th class="subtotal">{{number_format(Session::get('Cart')->totalPrice).' '.'VND'}}</th>
+                <th class="subtotal"><i class="fas fa-cart-arrow-down" style="color:forestgreen"></i></th>
+                <th class="remove"><i class="fas fa-trash-alt" style="color:crimson"></i></th>
+            </tr>
         </table>
         <div class="row justify-content-between mb-n3">
             <div class="col-auto mb-3">

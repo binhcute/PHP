@@ -14,7 +14,7 @@
 Route::group(['middleware' => 'levellogin'],function(){
     //Server
     Route::resource('/admin','ServerController');
-    Route::resource('/MyAccount','MyAccountController');
+    Route::resource('/MyAccount','MyAccountController')->except('destroy');
     //Product
     Route::resource('/SanPham','ProductController');
     Route::get('/XoaSanPham/{SanPham}','ProductController@destroy');
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'levellogin'],function(){
     Route::put('/BaiViet/disabled/{BaiViet}','ArticleController@disabled');
     Route::put('/BaiViet/enabled/{BaiViet}','ArticleController@enabled');
     //Order
-    Route::resource('/HoaDon','OrderController');
+    Route::resource('/HoaDon','OrderController')->only('index','show');
     Route::put('/HoaDon/danggiao/{HoaDon}','OrderController@update_status_0');
     Route::put('/HoaDon/xuly/{HoaDon}','OrderController@update_status_1');
     Route::put('/HoaDon/thanhcong/{HoaDon}','OrderController@update_status_2');
@@ -102,7 +102,7 @@ Route::get('/article','ClientController@article');
 Route::resource('/TaiKhoan','AccountController')->only('update');
 
 //Cart
-Route::resource('/cart','CartController');
+Route::resource('/cart','CartController')->only('index','store');
 Route::get('/item-cart/{id}','CartController@AddCart');
 Route::get('product/item-cart/{id}/{qty}','CartController@AddCartDT');
 Route::get('/delete-item-cart/{id}','CartController@DeleteItemCart');
@@ -112,7 +112,7 @@ Route::get('/save-item-list-cart/{id}/{qty}','CartController@SaveItemListCart');
 
 
 //Favỏite
-Route::resource('/favorite','FavoriteController');
+Route::resource('/favorite','FavoriteController')->only('index');
 Route::get('/item-favorite/{id}','FavoriteController@AddFavorite');
 Route::get('/item-favorite-dt/{id}/{qty}','FavoriteController@AddFavoriteDT');
 Route::get('/delete-item-favorite/{id}','FavoriteController@DeleteItemFavorite');

@@ -30,11 +30,20 @@
                 </td>
                 <td class="subtotal"><span>{{number_format($item['price']).' '.'VND'}}</span></td>
                 </td>
-                <td><a onclick="SaveItemListCart({{$item['product_info']->product_id}});"><i class="fas fa-cart-arrow-down"></i></a></td>
-                <td><a onclick="DeleteItemListCart({{$item['product_info']->product_id}});"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a onclick="SaveItemListCart({{$item['product_info']->product_id}});"><i class="fas fa-cart-arrow-down" style="color:forestgreen"></i></a></td>
+                <td><a onclick="DeleteItemListCart({{$item['product_info']->product_id}});"><i class="fas fa-trash-alt" style="color:crimson"></i></a></td>
             </tr>
             @endforeach
         </tbody>
+        <tr>
+            <th class="avatar"></th>
+            <th class="name"></th>
+            <th class="price"></th>
+            <th class="quantity">{{Session::get("Cart")->totalQuantity}} Sản Phẩm</th>
+            <th class="subtotal">{{number_format(Session::get('Cart')->totalPrice).' '.'VND'}}</th>
+            <th class="subtotal"><i class="fas fa-cart-arrow-down" style="color:forestgreen"></i></th>
+            <th class="remove"><i class="fas fa-trash-alt" style="color:crimson"></i></th>
+        </tr>
     </table>
     <div class="row justify-content-between mb-n3">
         <div class="col-auto mb-3">
