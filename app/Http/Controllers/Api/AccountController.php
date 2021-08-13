@@ -30,8 +30,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create($request->all());
-        return new AccountResource($user);
+        //
     }
 
     /**
@@ -42,8 +41,7 @@ class AccountController extends Controller
      */
     public function show(User $user)
     {
-        dd($user);
-        return new AccountResource($user);
+        //
     }
 
     /**
@@ -73,7 +71,6 @@ class AccountController extends Controller
     }
     public function register(Request $request)
     {
-        // dd($request->all());
         $user = new User();
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;
@@ -96,12 +93,7 @@ class AccountController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])){
-            $user = Auth::user();
-            // dd($user);
-
             $accessToken = Auth::user()->createToken('authToken')->accessToken;
-// dd($accessToken);
-            // dd($user);
             return response()->json(['user' => Auth::user(),'access_token'=>$accessToken]);
         }
         return response()->json(['error' => 'Username or password incorrect, please try again!'],401);
