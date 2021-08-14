@@ -76,6 +76,7 @@
                           <li class="list-inline-item"><a href="#"><i class="fa fa-rss"></i></a></li>
                         </ul>
                       </div>
+                      <a href="{{route('TaiKhoan.edit',Auth::user()->id)}}" class="btn btn-pill btn-primary-gradien">Chỉnh Sửa</a>
                       <div class="follow">
                         <div class="row">
                           <div class="col-6 text-md-end border-right">
@@ -90,117 +91,7 @@
                   </div>
                 </div>
                 <!-- user profile first-style end-->
-                <!-- user profile second-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <p>you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                      <div class="img-container">
-                        <div class="my-gallery" id="aniimated-thumbnials" itemscope="">
-                          <figure itemprop="associatedMedia" itemscope=""><a href="../assets/images/other-images/profile-style-img3.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/other-images/profile-style-img3.png" itemprop="thumbnail" alt="gallery"></a>
-                            <figcaption itemprop="caption description">Image caption  1</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="like-comment">
-                        <ul class="list-inline">
-                          <li class="list-inline-item border-right pe-3">
-                            <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                          </li>
-                          <li class="list-inline-item ms-2">
-                            <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile second-style end-->
-                <!-- user profile third-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <p>you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                      <div class="row mt-4 pictures my-gallery" id="aniimated-thumbnials-2" itemscope="">
-                        <figure class="col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/other-images/profile-style-img3.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/other-images/profile-style-img.png" itemprop="thumbnail" alt="gallery"></a>
-                          <figcaption itemprop="caption description">Image caption  1</figcaption>
-                        </figure>
-                        <figure class="col-sm-6" itemprop="associatedMedia" itemscope=""><a href="../assets/images/other-images/profile-style-img3.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/other-images/profile-style-img.png" itemprop="thumbnail" alt="gallery"></a>
-                          <figcaption itemprop="caption description">Image caption  2</figcaption>
-                        </figure>
-                      </div>
-                      <div class="like-comment">
-                        <ul class="list-inline">
-                          <li class="list-inline-item border-right pe-3">
-                            <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                          </li>
-                          <li class="list-inline-item ms-2">
-                            <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile third-style end-->
-                <!-- user profile fourth-style start-->
-                <div class="col-sm-12">
-                  <div class="card">
-                    <div class="profile-img-style">
-                      <div class="row">
-                        <div class="col-sm-8">
-                          <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
-                            <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
-                        </div>
-                      </div>
-                      <hr>
-                      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source .Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source</p>
-                      <div class="like-comment mt-4">
-                        <ul class="list-inline">
-                          <li class="list-inline-item border-right pe-3">
-                            <label class="m-0"><a href="#"><i class="fa fa-heart"></i></a>  Like</label><span class="ms-2 counter">2659</span>
-                          </li>
-                          <li class="list-inline-item ms-2">
-                            <label class="m-0"><a href="#"><i class="fa fa-comment"></i></a>  Comment</label><span class="ms-2 counter">569</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- user profile fourth-style end-->
+                @foreach ($article as $item)
                 <!-- user profile fifth-style start-->
                 <div class="col-sm-12">
                   <div class="card">
@@ -209,19 +100,19 @@
                         <div class="col-sm-8">
                           <div class="media"><img class="img-thumbnail rounded-circle me-3" src="../assets/images/user/7.jpg" alt="Generic placeholder image">
                             <div class="media-body align-self-center">
-                              <h5 class="mt-0 user-name">JOHAN DIO</h5>
+                              <h5 class="mt-0 user-name">{{$item->firstName}} {{$item->lastName}}</h5>
                             </div>
                           </div>
                         </div>
                         <div class="col-sm-4 align-self-center">
-                          <div class="float-sm-end"><small>10 Hours ago</small></div>
+                          <div class="float-sm-end"><small>9 Hours ago</small></div>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-lg-12 col-xl-4">
                           <div class="my-gallery" id="aniimated-thumbnials-3" itemscope="">
-                            <figure itemprop="associatedMedia" itemscope=""><a href="../assets/images/blog/img.png" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="../assets/images/blog/img.png" itemprop="thumbnail" alt="gallery"></a>
+                            <figure itemprop="associatedMedia" itemscope=""><a href="{{URL::to('/')}}/server/assets/image/article/{{$item->article_img}}" itemprop="contentUrl" data-size="1600x950"><img class="img-fluid rounded" src="{{URL::to('/')}}/server/assets/image/article/{{$item->article_img}}" itemprop="thumbnail" alt="gallery"></a>
                               <figcaption itemprop="caption description">Image caption  1</figcaption>
                             </figure>
                           </div>
@@ -237,13 +128,14 @@
                           </div>
                         </div>
                         <div class="col-xl-6">
-                          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consecteturContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur</p>
+                          <p>{!!$item->article_description!!}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- user profile fifth-style end-->
+                @endforeach
                 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="pswp__bg"></div>
                   <div class="pswp__scroll-wrap">

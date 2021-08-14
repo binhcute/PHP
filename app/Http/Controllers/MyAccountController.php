@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MyAccountController extends Controller
 {
@@ -13,7 +15,17 @@ class MyAccountController extends Controller
      */
     public function index()
     {
-        return view('pages.server.myaccount');
+        $article = DB::table('users')
+            ->join('tpl_article', 'tpl_article.user_id', '=', 'users.id')
+            ->leftJoin('tpl_comment', 'tpl_comment.article_id', '=', 'tpl_article.article_id')
+            ->select(
+                'tpl_article.*',
+                'tpl_comment.comment_id',
+                'users.firstName','users.lastName','users.avatar'
+            )
+            ->where('users.id', Auth::user()->id)->get();
+        // dd($article);
+        return view('pages.server.myaccount')->with('article', $article);
     }
 
     /**

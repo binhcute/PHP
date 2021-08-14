@@ -167,12 +167,14 @@ class PortfolioController extends Controller
     {
         $portfolio = DB::table('tpl_portfolio')
             ->leftJoin('tpl_product', 'tpl_product.port_id', '=', 'tpl_portfolio.port_id')
-            ->where('tpl_portfolio,port_id', $id)
+            ->where('tpl_portfolio.port_id', $id)
             ->select(
                 'tpl_portfolio.*',
                 'tpl_product.product_id'
-            );
+            )->first();
+// dd($portfolio);
         $port = Portfolio::find($id);
+
         if ($portfolio->product_id == NULL) {
             $port->delete();
             Session::put('destroy', 'Đã Xóa Nhà Cung Cấp');

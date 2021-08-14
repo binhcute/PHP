@@ -152,7 +152,9 @@
                   </li>
                   <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i data-feather="box"></i><span>Chức Năng</span></a>
                     <ul class="sidebar-submenu">
+                      @if(Auth::user()->id ==1)
                       <li><a href="{{route('TaiKhoan.index')}}">Quản Lý Tài Khoản</a></li>
+                      @endif
                       <li><a href="{{route('HoaDon.index')}}">Quản Lý Hóa Đơn</a></li>
                       <li><a href="{{route('BinhLuan.store')}}">Quản Lý Bình Luận</a></li>
                       <li><a href="{{URL::to('/QuanLyAPI')}}">Quản Lý API</a></li>

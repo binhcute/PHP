@@ -103,9 +103,9 @@
                         <div class="header-wishlist">
 
                             @if(Session::has("Favorite")!= null)
-                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
                             @else
-                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><i class="fal fa-heart"></i></a>
                             @endif
                         </div>
                         <div class="header-cart">
@@ -190,9 +190,9 @@
                         </div>
                         <div class="header-wishlist">
                             @if(Session::has("Favorite")!= null)
-                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
                             @else
-                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><i class="fal fa-heart"></i></a>
                             @endif
                         </div>
                         <div class="header-cart">
@@ -244,9 +244,9 @@
                         </div>
                         <div class="header-wishlist d-none d-sm-block">
                             @if(Session::has("Favorite")!= null)
-                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
                             @else
-                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><i class="fal fa-heart"></i></a>
                             @endif
                         </div>
                         <div class="header-cart">
@@ -298,9 +298,9 @@
                         </div>
                         <div class="header-wishlist d-none d-sm-block">
                             @if(Session::has("Favorite")!= null)
-                            <a href="{{URL::to('/favorite')}}"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><span id="total-qty-favorite">{{Session::get("Favorite")->totalQuantity}}</span><i class="fal fa-heart"></i></a>
                             @else
-                            <a href="{{URL::to('/favorite')}}"><i class="fal fa-heart"></i></a>
+                            <a href="#offcanvas-wishlist" class="offcanvas-toggle"><i class="fal fa-heart"></i></a>
                             @endif
                         </div>
                         <div class="header-cart">
