@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->Increments('order_id');
             $table->integer('user_id');
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('status')->default('1');
             $table->text('note')->nullable();
             $table->string('address');

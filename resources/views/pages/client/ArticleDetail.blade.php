@@ -22,8 +22,8 @@
                             <h6>{!!$article->article_description!!}</h6>
                             <br>
                             <div class="image">
-                        <a href="blog-details-right-sidebar.html"><img src="{{ URL::to('/') }}/server/assets/image/article/{{$article->article_img }}" alt="Blog Image"></a>
-                    </div>
+                                <a href="blog-details-right-sidebar.html"><img src="{{ URL::to('/') }}/server/assets/image/article/{{$article->article_img }}" alt="Blog Image"></a>
+                            </div>
                             <p>{!!$article->article_detail!!}</p>
                         </div>
                     </div>
@@ -119,96 +119,146 @@
                     </div>
                     @if(Auth::check())
                     <div class="comment-form">
-                        <form action="{{route('BinhLuan.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
+                        <form action="{{route('BinhLuan.store')}}" method="post" enctype="multipart/form-data" class="add-comment">
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
                             <div class="row learts-mb-n20">
-                            <input type="hidden" name="article_id" value="{{ $article->article_id }}">
-                            <input type="hidden" name="role" value="0">
-                            <div class="col-12 learts-mb-20">
-                                <textarea id="ckeditor1" name="comment_description" placeholder="Message"></textarea>
+                                <input type="hidden" name="article_id" value="{{ $article->article_id }}">
+                                <input type="hidden" name="role" value="0">
+                                <div class="col-12 learts-mb-20">
+                                    <textarea id="ckeditor1" name="comment_description" placeholder="Message"></textarea>
+                                </div>
+                                <div class="col-12 text-center learts-mb-20 learts-mt-20">
+                                    <button type="submit" class="btn btn-dark btn-outline-hover-primary">Đăng</button>
+                                </div>
                             </div>
-                            <div class="col-12 text-center learts-mb-20 learts-mt-20">
-                                <button type="submit" class="btn btn-dark btn-outline-hover-primary">Đăng</button>
-                            </div>
+                        </form>
                     </div>
-                    </form>
-                </div>
-                @else
-                <div class="text-center">
+                    @else
+                    <div class="text-center">
                         <p class="note">Hãy Đăng Nhập Để Thêm Bình Luận</p>
                         <a href="{{route('login')}}" type="button" class="btn btn-info btn-hover-primary">Đăng Nhập Ngay</a>
 
                     </div>
                     @endif
+                </div>
             </div>
+
+            <div class="col-xl-3 col-lg-4 col-12 learts-mb-10">
+                <!-- Search Start -->
+                <div class="single-widget learts-mb-40">
+                    <div class="widget-search">
+                        <form action="#">
+                            <input type="text" placeholder="Search products....">
+                            <button><i class="fal fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Search End -->
+
+                <!-- Blog Post Widget Start -->
+                <div class="single-widget learts-mb-40">
+                    <h3 class="widget-title product-filter-widget-title">Bài đăng gần đây</h3>
+                    <ul class="widget-blogs">
+                        @foreach($recent as $rc)
+                        <li class="widget-blog">
+                            <div class="thumbnail">
+                                <a href="{{URL::to('/article/'.$rc->article_id)}}"><img src="{{URL::to('/') }}/server/assets/image/article/{{$rc->article_img}}" alt="Widget Blog Post"></a>
+                            </div>
+                            <div class="content">
+                                <h6 class="title"><a href="{{URL::to('/article/'.$rc->article_id)}}">{{$rc->article_name}}</a></h6>
+                                <span class="date">{{$rc->updated_at}}</span>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <!-- Blog Post Widget End -->
+
+                <!-- Categories Start -->
+                <div class="single-widget learts-mb-40">
+                    <div class="widget-banner">
+                        <img src="{{asset('client/images/banner/widget-banner.jpg')}}" alt="">
+                    </div>
+                </div>
+                <!-- Categories End -->
+
+                <!-- Categories Start -->
+                <div class="single-widget learts-mb-40">
+                    <h3 class="widget-title product-filter-widget-title">Categories</h3>
+                    <ul class="widget-list">
+                        @foreach($cate as $rc)
+                        <li><a href="{{URL::to('/article/'.$rc->cate_id)}}">{{$rc->cate_name}}</a> <span class="count">11</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <!-- Categories End -->
+
+                <!-- Tags Start -->
+                <div class="single-widget learts-mb-40">
+                    <h3 class="widget-title product-filter-widget-title">Product Tags</h3>
+                    <div class="widget-tags">
+                        <a href="#">design</a>
+                        <a href="#">fashion</a>
+                        <a href="#">learts</a>
+                    </div>
+                </div>
+                <!-- Tags End -->
+            </div>
+
         </div>
-
-        <div class="col-xl-3 col-lg-4 col-12 learts-mb-10">
-            <!-- Search Start -->
-            <div class="single-widget learts-mb-40">
-                <div class="widget-search">
-                    <form action="#">
-                        <input type="text" placeholder="Search products....">
-                        <button><i class="fal fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-            <!-- Search End -->
-
-            <!-- Blog Post Widget Start -->
-            <div class="single-widget learts-mb-40">
-                <h3 class="widget-title product-filter-widget-title">Bài đăng gần đây</h3>
-                <ul class="widget-blogs">
-                    @foreach($recent as $rc)
-                    <li class="widget-blog">
-                        <div class="thumbnail">
-                            <a href="{{URL::to('/article/'.$rc->article_id)}}"><img src="{{URL::to('/') }}/server/assets/image/article/{{$rc->article_img}}" alt="Widget Blog Post"></a>
-                        </div>
-                        <div class="content">
-                            <h6 class="title"><a href="{{URL::to('/article/'.$rc->article_id)}}">{{$rc->article_name}}</a></h6>
-                            <span class="date">{{$rc->updated_at}}</span>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-            <!-- Blog Post Widget End -->
-
-            <!-- Categories Start -->
-            <div class="single-widget learts-mb-40">
-                <div class="widget-banner">
-                    <img src="assets/images/banner/widget-banner.jpg" alt="">
-                </div>
-            </div>
-            <!-- Categories End -->
-
-            <!-- Categories Start -->
-            <div class="single-widget learts-mb-40">
-                <h3 class="widget-title product-filter-widget-title">Categories</h3>
-                <ul class="widget-list">
-                    @foreach($cate as $rc)
-                    <li><a href="{{URL::to('/article/'.$rc->cate_id)}}">{{$rc->cate_name}}</a> <span class="count">11</span></li>
-                    @endforeach
-                </ul>
-            </div>
-            <!-- Categories End -->
-
-            <!-- Tags Start -->
-            <div class="single-widget learts-mb-40">
-                <h3 class="widget-title product-filter-widget-title">Product Tags</h3>
-                <div class="widget-tags">
-                    <a href="#">design</a>
-                    <a href="#">fashion</a>
-                    <a href="#">learts</a>
-                </div>
-            </div>
-            <!-- Tags End -->
-        </div>
-
     </div>
-</div>
 
 </div>
 <!-- Portfolio Section End -->
 
+@endsection
+@section('page-js')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    function addComment(event) {
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        console.log(form.serialize());
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function(data) {
+                if (data.status == 'error') {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Thất Bại',
+                        text: data.message,
+                        showConfirmButton: true,
+                        timer: 2500
+                    })
+                }
+                if (data.status == 'success') {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Thành Công',
+                        text: data.message,
+                        showConfirmButton: true,
+                        timer: 2500
+                    })
+                    window.setTimeout(function() {
+                        window.location.reload();
+                    }, 2500);
+                }
+            }
+        });
+    }
+
+    $(function() {
+        $(document).on('click', '.add-comment', addComment);
+
+    });
+</script>
 @endsection

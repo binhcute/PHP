@@ -183,7 +183,7 @@
           })
           window.setTimeout(function() {
             window.location.replace("{{URL::to('/')}}");
-          }, 3000);
+          }, 2500);
         }
       }
     });

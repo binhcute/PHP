@@ -76,7 +76,7 @@ class ArticleController extends Controller
     {
         $article = DB::table('tpl_article')
             ->join('users', 'users.id', '=', 'tpl_article.user_id')
-            ->where('article_id', $id)->first();
+            ->where('article_id', $id)->first(); 
         return view('pages.server.article.show')
             ->with('article', $article);
     }
@@ -137,8 +137,10 @@ class ArticleController extends Controller
     {
         $article = article::find($id);
         $article->delete();
-        Session::put('destroy', 'Đã Xóa Bài Viết');
-        return redirect()->route('BaiViet.index');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Xóa Bài Viết Thành Công'
+        ], 200);
     }
 
     public function disabled($id)

@@ -132,22 +132,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $cate = DB::table('tpl_category')
-            ->where('tpl_category.cate_id', $id)
-            ->leftJoin('tpl_product', 'tpl_product.cate_id', '=', 'tpl_category.cate_id')
-            ->select(
-                'tpl_category.*',
-                'tpl_product.product_id'
-            )->first();
         $category = Category::find($id);
-        if ($cate->product_id == NULL) {
-            $category->delete();
-            Session::put('destroy', 'Đã Xóa Loại Sản Phẩm');
-            return redirect()->route('LoaiSanPham.index');
-        } else {
-            Session::put('destroy', 'Chưa xóa hết sản phẩm trong loại sản phẩm này');
-            return redirect()->back();
-        }
+        $category->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Xóa Loại Sản Phẩm Thành Công'
+        ], 200);
     }
 
     public function disabled($id)

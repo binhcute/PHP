@@ -20,10 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = DB::table('tpl_product')
-            // ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
-            // ->join('tpl_portfolio', 'tpl_portfolio.port_id', '=', 'tpl_product.port_id')
-            ->orderBy('tpl_product.product_id', 'ASC')->get();
+        $product = Product::all();
         return view('pages.server.product.list')
             ->with('product', $product);
     }
@@ -190,8 +187,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        Session::put('destroy', 'Đã Xóa Sản Phẩm');
-        return redirect()->route('SanPham.index');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Xóa Sản Phẩm Thành Công'
+        ], 200);
     }
     public function disabled($id)
     {

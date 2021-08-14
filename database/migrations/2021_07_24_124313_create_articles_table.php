@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->text('article_detail');
             $table->string('article_keyword',50)->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('status');
             $table->integer('view')->nullable();
         });

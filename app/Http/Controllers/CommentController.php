@@ -51,7 +51,11 @@ class CommentController extends Controller
         $comment->comment_description = $request->comment_description;
         $comment->status = 1;
         $comment->save();
-        return redirect()->back();
+        dd($comment);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Thêm Bình Luận Thành Công'
+        ], 200);
     }
 
     public function disabled($id)

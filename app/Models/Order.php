@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'tpl_order';
 
     protected $primaryKey = 'order_id';
@@ -19,7 +22,8 @@ class Order extends Model
         'address',
         'phone',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
 
     public function orderDetail(){

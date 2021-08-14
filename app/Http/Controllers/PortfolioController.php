@@ -19,8 +19,7 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $port = DB::table('tpl_portfolio')
-            ->orderBy('port_id', 'desc')->get();
+        $port = Portfolio::all();
         return view('pages.server.portfolio.list')
             ->with('port', $port);
     }
@@ -165,29 +164,12 @@ class PortfolioController extends Controller
      */
     public function destroy($id)
     {
-        $portfolio = DB::table('tpl_portfolio')
-            ->leftJoin('tpl_product', 'tpl_product.port_id', '=', 'tpl_portfolio.port_id')
-            ->where('tpl_portfolio.port_id', $id)
-            ->select(
-                'tpl_portfolio.*',
-                'tpl_product.product_id'
-            )->first();
-// dd($portfolio);
         $port = Portfolio::find($id);
-
-        if ($portfolio->product_id == NULL) {
-            $port->delete();
-            Session::put('destroy', 'Đã Xóa Nhà Cung Cấp');
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Xóa Nhà Cung Cấp Thành Công'
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Xóa Nhà Cung Cấp Thất Bại'
-            ], 200);
-        }
+        $port->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Xóa Nhà Cung Cấp Thành Công'
+        ], 200);
     }
 
     public function disabled($id)

@@ -22,6 +22,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('port_img')->nullable();
             $table->text('port_description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('status');
         });
     }

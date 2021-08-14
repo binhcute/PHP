@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'tpl_category';
 
     protected $primaryKey = 'cate_id';
@@ -18,6 +21,7 @@ class Category extends Model
         'status',
         'created_at',
         'updated_at',
+        'deleted_at',
         'view'
     ];
 
@@ -26,7 +30,7 @@ class Category extends Model
     // }
 
     public function Product(){
-        return $this->HasMany('App\Models\Product','cate_id','cate_id');
+        return $this->HasMany('App\Models\Product','cate_id','cate_id')->withTrashed();
     }
     public function User(){
         return $this->belongsTo('App\User', 'user_id','id');

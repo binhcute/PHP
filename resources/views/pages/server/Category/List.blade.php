@@ -62,8 +62,8 @@
                 <a href="{{route('LoaiSanPham.edit',$item->cate_id)}}">
                   <i class="icofont icofont-pencil-alt-5" style="font-size:20px;color:blue"></i>
                 </a>
-                <a href="{{URL::to('/XoaLoaiSanPham',$item->cate_id)}}" onclick="return confirm('Bạn muốn xóa danh mục này ?')">
-                  <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <a data-url="{{URL::to('/XoaLoaiSanPham',$item->cate_id)}}" class="delete-item">
+                  <meta name="csrf-token" content="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="delete">
                   <i class="icofont icofont-trash" style="font-size:20px;color:red"></i>
                 </a>
@@ -92,44 +92,108 @@
 @endsection
 @section('page-js')
 <script>
-  function changeStatus(event) {
+    function changeStatus(event) {
     event.preventDefault();
     var form = $(this);
     var url = form.attr('action');
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: form.serialize(),
-      success: function(data) {
-        if (data.status == 'error') {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Thất Bại',
-            text: data.message,
-            showConfirmButton: true,
-            timer: 2500
-          })
-        }
-        if (data.status == 'success') {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Thành Công',
-            text: data.message,
-            showConfirmButton: true,
-            timer: 2500
-          })
-          window.setTimeout(function() {
-            window.location.reload();
-          }, 3000);
-        }
+    Swal.fire({
+      title: 'Bạn muốn thay đổi trạng thái này ?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#3085d6',
+      cancelButtonText: 'Hủy',
+      confirmButtonText: 'Thay Đổi'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: form.serialize(),
+          success: function(data) {
+            if (data.status == 'error') {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Thất Bại',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+            }
+            if (data.status == 'success') {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Thành Công',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+              window.setTimeout(function() {
+                window.location.reload();
+              }, 2500);
+            }
+          }
+        });
+      }
+
+    });
+  }
+  function deleteItem(event) {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-
+    event.preventDefault();
+    var url = $(this).data('url');
+    console.log(url);
+    Swal.fire({
+      title: 'Bạn muốn xóa loại sản phẩm này ?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#3085d6',
+      cancelButtonText: 'Hủy',
+      confirmButtonText: 'Thay Đổi'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function(data) {
+            if (data.status == 'error') {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Thất Bại',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+            }
+            if (data.status == 'success') {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Thành Công',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+              window.setTimeout(function() {
+                window.location.reload();
+              }, 2500);
+            }
+          }
+        });
+      }
+    });
   }
   $(function() {
     $(document).on('click', '.change_status_tri', changeStatus);
+    $(document).on('click', '.delete-item', deleteItem);
   });
 </script>
 @endsection

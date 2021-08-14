@@ -98,13 +98,13 @@
     var form = $(this);
     var url = form.attr('action');
     Swal.fire({
-      title: 'Bạn có chắc muốn khóa tài khoản ?',
+      title: 'Bạn muốn thay đổi trạng thái này ?',
       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#d33',
       confirmButtonColor: '#3085d6',
       cancelButtonText: 'Hủy',
-      confirmButtonText: 'Khóa'
+      confirmButtonText: 'Thay Đổi'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
@@ -133,7 +133,7 @@
               })
               window.setTimeout(function() {
                 window.location.reload();
-              }, 3000);
+              }, 2500);
             }
           }
         });
@@ -151,33 +151,45 @@
     event.preventDefault();
     var url = $(this).data('url');
     console.log(url);
-    $.ajax({
-      type: "GET",
-      url: url,
-      success: function(data) {
-        if (data.status == 'error') {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Thất Bại',
-            text: data.message,
-            showConfirmButton: true,
-            timer: 2500
-          })
-        }
-        if (data.status == 'success') {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Thành Công',
-            text: data.message,
-            showConfirmButton: true,
-            timer: 2500
-          })
-          window.setTimeout(function() {
-            window.location.reload();
-          }, 3000);
-        }
+    Swal.fire({
+      title: 'Bạn muốn xóa nhà cung cấp này ?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#3085d6',
+      cancelButtonText: 'Hủy',
+      confirmButtonText: 'Thay Đổi'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function(data) {
+            if (data.status == 'error') {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Thất Bại',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+            }
+            if (data.status == 'success') {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Thành Công',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+              window.setTimeout(function() {
+                window.location.reload();
+              }, 2500);
+            }
+          }
+        });
       }
     });
   }

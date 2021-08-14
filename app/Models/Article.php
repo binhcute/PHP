@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'tpl_article';
     //Khóa chính tự động tăng int
     protected $primaryKey = 'article_id';
@@ -23,6 +26,7 @@ class Article extends Model
         'status',
         'created_at',
         'updated_at',
+        'deleted_at',
         'view'
     ];
 

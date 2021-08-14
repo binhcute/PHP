@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'tpl_product';
 
     protected $primaryKey = 'product_id';
@@ -28,7 +31,8 @@ class Product extends Model
         'status',
         'created_at',
         'updated_at',
-        'view'
+        'view',
+        'deleted_at'
     ];
 
     public function categories()

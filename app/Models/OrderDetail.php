@@ -19,9 +19,7 @@ class OrderDetail extends Model
         'order_id',
         'quantity',
         'price',
-        'amount',
-        'created_at',
-        'updated_at'
+        'amount'
     ];
 
     public function order(){

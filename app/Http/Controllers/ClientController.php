@@ -24,7 +24,8 @@ class ClientController extends Controller
         $product_new = DB::table('tpl_product')
             ->where('status', 1)->orderBy('created_at', 'desc')->limit(4)->get();
         $cate = DB::table('tpl_category')
-            ->where('status', 1)->get();
+            ->where('status', 1)
+            ->where('deleted_at', NULL)->get();
         return view('pages.client.index')
             ->with('product_hot', $product_hot)
             ->with('product_new', $product_new)
@@ -106,22 +107,23 @@ class ClientController extends Controller
             ->where('tpl_article.article_id', $id)->first();
         $related = DB::table('tpl_article')->inRandomOrder()->limit(2)->get();
         $comment = DB::table('tpl_comment')
-        ->select(
-            'tpl_comment.comment_description',
-            'tpl_comment.updated_at',
-            'users.avatar',
-            'users.firstName',
-            'users.lastName'
-        )
-        ->join('users', 'users.id', '=', 'tpl_comment.user_id')
-        ->where('tpl_comment.status', 1)
-        ->where('tpl_comment.article_id', $id)->get();
+            ->select(
+                'tpl_comment.comment_description',
+                'tpl_comment.updated_at',
+                'users.avatar',
+                'users.firstName',
+                'users.lastName'
+            )
+            ->join('users', 'users.id', '=', 'tpl_comment.user_id')
+            ->where('tpl_comment.status', 1)
+            ->where('tpl_comment.article_id', $id)->get();
         $recent = DB::table('tpl_article')
-        ->where('status',1)
-        ->orderBy('created_at', 'desc')->limit(3)->get();
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')->limit(3)->get();
         $cate = DB::table('tpl_category')
-        ->where('status', 1)
-        ->orderBy('created_at', 'desc')->limit(3)->get();
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')->limit(3)->get();
+            
         return view('pages.client.articledetail')
             ->with('article', $article)
             ->with('related', $related)
@@ -134,19 +136,26 @@ class ClientController extends Controller
 
     public function categories_detail()
     {
-        $categories = DB::select('select * from tpl_category where status = ?', [1]);
+        $categories = DB::table('tpl_category')
+            ->where('status', 1)
+            ->where('deleted_at', NULL)->get();
         return view('pages.client.categoriesdetail')->with('categories', $categories);
     }
 
 
     public function categories_list($id)
     {
-        $product_cate = DB::select('select * from tpl_category where status = ?', [1]);
-        $portfolio = DB::select('select * from tpl_portfolio where status = ?', [1]);
+        $product_cate = DB::table('tpl_category')
+            ->where('status', 1)
+            ->where('deleted_at', NULL)->get();
+        $portfolio = DB::table('tpl_portfolio')
+        ->where('status', 1)
+        ->where('deleted_at',NULL)->get();
         $categories = Category::find($id);
         $product_by_category = DB::table('tpl_product')
             ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
-            ->where('tpl_category.cate_id', $id)->get();
+            ->where('tpl_category.cate_id', $id)
+            ->where('tpl_category.deleted_at', NULL)->get();
         return view('pages.client.categorieslist')
             ->with('categories', $categories)
             ->with('portfolio', $portfolio)
@@ -158,7 +167,9 @@ class ClientController extends Controller
 
     public function portfolio_detail()
     {
-        $portfolio = DB::select('select * from tpl_portfolio where status = ?', [1]);
+        $portfolio = DB::table('tpl_portfolio')
+        ->where('status', 1)
+        ->where('deleted_at',NULL)->get();
         return view('pages.client.portfoliodetail')->with('portfolio', $portfolio);
     }
 

@@ -22,6 +22,7 @@ class CreateCommentsTable extends Migration
             $table->integer('role');
             $table->text('comment_description');
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('status');
         });
     }
