@@ -16,7 +16,7 @@
   <title>Cuba - Premium Admin Template</title>
   <!-- Google font-->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/font-awesome/css/font-awesome.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/font-awesome/css/font-awesome.css')}}">
   <!-- ico-font-->
   <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/vendors/icofont.css')}}">
   <!-- Themify icon-->
@@ -34,6 +34,7 @@
   <link id="color" rel="stylesheet" href="{{asset('server/assets/css/color-1.css')}}" media="screen">
   <!-- Responsive css-->
   <link rel="stylesheet" type="text/css" href="{{asset('server/assets/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.css')}}">
 </head>
 
 <body>
@@ -47,19 +48,9 @@
             <div><a class="logo text-start" href="{{route('index')}}"><img class="img-fluid for-light" src="{{asset('client/images/logo/logo-2.png')}}" alt="Learts Logo"><img class="img-fluid for-dark" src="{{asset('server/assets/images/logo/logo_dark.png')}}" alt="looginpage"></a></div>
             <div class="login-main">
 
-              <form class="theme-form" method="POST" action="{{ url('/LoginCheck') }}">
+              <form class="theme-form" method="POST" action="{{ url('/LoginCheck') }}" id="login-check-tri">
                 {{ csrf_field() }}
                 <h4>Đăng nhập</h4>
-                <?php
-                $message = Session::get('message');
-                if ($message) {
-                  echo '<p style="color:red">' . $message . '</p>';
-                  Session::put('message', null);
-                } else {
-                  echo '<p>
-                  Nhập tài khoản & mật khẩu để đăng nhập</p>';
-                }
-                ?>
                 <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
                   <label class="col-form-label">Tài khoản</label>
                   <input type="text" class="form-control" name="username" required="" placeholder="Username" value="{{ old('username') }}" required autofocus>
@@ -100,7 +91,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <form role="form" method="POST" action="{{ url('/register') }}">
+            <form role="form" method="POST" action="{{ url('/register') }}" id="register-check-tri">
               {{ csrf_field() }}
               <fieldset>
                 <div class="form-row">
@@ -178,9 +169,84 @@
     <script src="{{asset('server/assets/js/script.js')}}"></script>
     <!-- login js-->
     <!-- Plugin used-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="{{asset('sweetarlet2/node_modules/sweetalert2/dist/sweetalert2.js')}}"></script>
+    <script>
+      $('#login-check-tri').submit(function (event) {
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: form.serialize(),
+          success: function(data) {
+            if (data.status == 'error') {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Thất Bại',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+            }
+            if (data.status == 'success') {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Thành Công',
+                text: data.message,
+                showConfirmButton: true,
+                timer: 2500
+              })
+              window.setTimeout(function() {
+                window.location.reload();
+              }, 2500);
+            }
+          }
+        });
+      });
+      // $('#register-check-tri').submit(function (event) {
+      //   event.preventDefault();
+      //   var form = $(this);
+      //   var url = form.attr('action');
+      //   $.ajax({
+      //     type: "POST",
+      //     url: url,
+      //     data: form.serialize(),
+      //     success: function(data) {
+      //       if (data.status == 'error') {
+      //         Swal.fire({
+      //           position: 'center',
+      //           icon: 'error',
+      //           title: 'Thất Bại',
+      //           text: data.message,
+      //           showConfirmButton: true,
+      //           timer: 2500
+      //         })
+      //       }
+      //       if (data.status == 'success') {
+      //         Swal.fire({
+      //           position: 'center',
+      //           icon: 'success',
+      //           title: 'Thành Công',
+      //           text: data.message,
+      //           showConfirmButton: true,
+      //           timer: 2500
+      //         })
+      //         window.setTimeout(function() {
+      //           window.location.reload();
+      //         }, 2500);
+      //       }
+      //     }
+      //   });
+      // });
+      
+    </script>
   </div>
 </body>
 

@@ -155,7 +155,7 @@ function changeStatus(event) {
     var url = $(this).data('url');
     console.log(url);
     Swal.fire({
-      title: 'Bạn muốn xóa nhà cung cấp này ?',
+      title: 'Bạn muốn xóa sản phẩm này ?',
       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#d33',

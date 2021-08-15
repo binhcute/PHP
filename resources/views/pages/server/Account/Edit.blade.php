@@ -71,7 +71,7 @@
             <div class="mb-3 row">
               <label class="col-sm-3 col-form-label">Mật Khẩu</label>
               <div class="col-sm-9">
-                <input class="form-control" type="password" placeholder="**********" name="password" value="{{$account->password}}">
+                <input class="form-control" type="password" placeholder="**********" name="password">
               </div>
             </div>
             <div class="mb-3 row">

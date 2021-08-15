@@ -8,67 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Account as AccountResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $user = User::all();
-        return AccountResource::collection($user);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        $user->update($request->all());
-        
-        return new AccountResource($user);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return response()->noContent();
-    }
     public function register(Request $request)
     {
         $user = new User();
@@ -88,14 +30,33 @@ class AccountController extends Controller
         return new AccountResource($user);
     }
 
-    public function login(Request $request){
-        if(Auth::attempt([
-            'email' => $request->email,
+    public function login(Request $request)
+    {
+        if (Auth::attempt([
+            'username' => $request->username,
             'password' => $request->password,
-        ])){
+        ])) {
             $accessToken = Auth::user()->createToken('authToken')->accessToken;
-            return response()->json(['user' => Auth::user(),'access_token'=>$accessToken]);
+            return response()->json(['user' => Auth::user(), 'access_token' => $accessToken]);
         }
-        return response()->json(['error' => 'Username or password incorrect, please try again!'],401);
+        return response()->json(['error' => 'Username or password incorrect, please try again!'], 401);
     }
+
+    public function userInfo(Request $request)
+    {
+        return response()->json($request->user('api'));
+    }
+//     public function logoutApi()
+// { 
+//     if (Auth::check()) {
+//        Auth::user()->AauthAcessToken()->delete();
+//     }
+// }
+public function logout(Request $request)
+{
+    $request->user()->token()->revoke();
+    return response()->json([
+        'message' => 'Successfully logged out'
+    ]);
+}
 }

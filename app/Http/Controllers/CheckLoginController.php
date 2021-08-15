@@ -28,15 +28,22 @@ class CheckLoginController extends Controller
         if (Auth::attempt($admin)) {
             Session::put('username',$request->username);
             Session::put('id',$request->id);
-            return Redirect::to('/admin');
-            // return redirect()->route('admin.index');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đăng Nhập Thành Công'
+            ], 200);
         } elseif(Auth::attempt($user)) {
 
-            return redirect('/');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đăng Nhập Thành Công'
+            ], 200);
         }
         else{
-            Session::put('message','Đăng nhập thất bại vui lòng đăng nhập lại');
-            return redirect('/login');
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Sai Tài Khoản hoặc Mật Khẩu, Vui Lòng Đăng Nhập Lại!'
+            ], 200);
         }   
         
     }

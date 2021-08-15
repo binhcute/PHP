@@ -6,6 +6,7 @@ use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Portfolio as PortfolioResource;
+use App\Http\Requests\Admin\StorePortfolioRequest;
 
 class PortfolioController extends Controller
 {
@@ -26,7 +27,7 @@ class PortfolioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePortfolioRequest $request)
     {
         $portfolio = Portfolio::create($request->all());
         return new PortfolioResource($portfolio);

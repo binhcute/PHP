@@ -136,9 +136,11 @@ class ClientController extends Controller
 
     public function categories_detail()
     {
-        $categories = DB::table('tpl_category')
-            ->where('status', 1)
-            ->where('deleted_at', NULL)->get();
+        // $categories = DB::table('tpl_category')
+        //     ->where('status', 1)
+        //     ->get();
+        $categories = Category::queryTri()->get();
+        dd($categories);
         return view('pages.client.categoriesdetail')->with('categories', $categories);
     }
 

@@ -69,4 +69,7 @@ class User extends Authenticatable
     public function order(){
         return $this->HasMany('App\Models\Order','user_id','id');
     }
+    public function AauthAcessToken(){
+        return $this->hasMany('App\Models\OauthAccessToken');
+    }
 }
