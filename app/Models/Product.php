@@ -48,4 +48,7 @@ class Product extends Model
     public function orderDetail(){
         return $this->HasMany('App\Models\OrderDetail','product_id','product_id');
     }
+    public function scopeQueryStatusOne($query){
+        return $query->where('tpl_product.status', 1);
+    }
 }

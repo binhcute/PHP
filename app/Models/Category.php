@@ -36,7 +36,7 @@ class Category extends Model
         return $this->belongsTo('App\User', 'user_id','id');
     }
 
-    public function scopeQueryTri($query){
-        return $query->where('status', 1);
+    public function scopeQueryStatusOne($query){
+        return $query->where('tpl_category.status', 1);
     }
 }

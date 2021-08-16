@@ -19,13 +19,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $product_hot = DB::table('tpl_product')
-            ->where('status', 1)->orderBy('product_price', 'desc')->limit(4)->get();
-        $product_new = DB::table('tpl_product')
-            ->where('status', 1)->orderBy('created_at', 'desc')->limit(4)->get();
-        $cate = DB::table('tpl_category')
-            ->where('status', 1)
-            ->where('deleted_at', NULL)->get();
+        $product_hot = Product::queryStatusOne()
+            ->orderBy('product_price', 'desc')->limit(4)->get();
+        $product_new = Product::queryStatusOne()
+            ->orderBy('created_at', 'desc')->limit(4)->get();
+        $cate = Category::queryStatusOne()->get();
         return view('pages.client.index')
             ->with('product_hot', $product_hot)
             ->with('product_new', $product_new)
@@ -33,11 +31,14 @@ class ClientController extends Controller
     }
     public function product()
     {
-        $product = DB::table('tpl_product')->where('status', 1)->orderBy('product_id', 'asc')->get();
-        $product_hot = DB::table('tpl_product')->where('status', 1)->orderBy('product_price', 'desc')->limit(6)->get();
-        $product_new = DB::table('tpl_product')->where('status', 1)->orderBy('created_at', 'desc')->limit(6)->get();
-        $product_cate = DB::select('select * from tpl_category where status = ?', [1]);
-        $portfolio = DB::select('select * from tpl_portfolio where status = ?', [1]);
+        $product = Product::queryStatusOne()
+            ->orderBy('product_id', 'asc')->get();
+        $product_hot = Product::queryStatusOne()
+            ->orderBy('product_price', 'desc')->limit(6)->get();
+        $product_new = Product::queryStatusOne()
+            ->orderBy('created_at', 'desc')->limit(6)->get();
+        $product_cate = Category::queryStatusOne()->get();
+        $portfolio = Portfolio::queryStatusOne()->get();
 
         return view('pages.client.productlist')
             ->with('product', $product)
@@ -53,17 +54,14 @@ class ClientController extends Controller
             ->join('tpl_portfolio', 'tpl_portfolio.port_id', 'tpl_product.port_id')
             ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
             ->where('tpl_product.product_id', $id)->first();
-
         $product_relate = DB::table('tpl_product')
             ->join('tpl_portfolio', 'tpl_portfolio.port_id', 'tpl_product.port_id')
             ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
             ->where('tpl_product.product_id', $id)->get();
-
         foreach ($product_relate as $key => $value) {
-
             $cate_id = $value->cate_id;
         }
-        $list = DB::table('tpl_product')
+        $list = Product::queryStatusOne()
             ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
             ->where('tpl_category.cate_id', $cate_id)
             ->whereNotIn('tpl_product.product_id', [$id])
@@ -94,8 +92,8 @@ class ClientController extends Controller
 
     public function article()
     {
-        $article = DB::table('tpl_article')->where('status', 1)->orderBy('created_at', 'desc')->paginate(6);
-        $product_cate = DB::select('select * from tpl_category where status = ?', [1]);
+        $article = Article::queryStatusOne()->orderBy('created_at', 'desc')->paginate(6);
+        $product_cate = Category::queryStatusOne()->get();
         return view('pages.client.articlelist')
             ->with('article', $article)
             ->with('product_cate', $product_cate);
@@ -117,13 +115,11 @@ class ClientController extends Controller
             ->join('users', 'users.id', '=', 'tpl_comment.user_id')
             ->where('tpl_comment.status', 1)
             ->where('tpl_comment.article_id', $id)->get();
-        $recent = DB::table('tpl_article')
-            ->where('status', 1)
+        $recent = Article::queryStatusOne()
             ->orderBy('created_at', 'desc')->limit(3)->get();
-        $cate = DB::table('tpl_category')
-            ->where('status', 1)
+        $cate = Category::queryStatusOne()
             ->orderBy('created_at', 'desc')->limit(3)->get();
-            
+
         return view('pages.client.articledetail')
             ->with('article', $article)
             ->with('related', $related)
@@ -136,28 +132,20 @@ class ClientController extends Controller
 
     public function categories_detail()
     {
-        // $categories = DB::table('tpl_category')
-        //     ->where('status', 1)
-        //     ->get();
-        $categories = Category::queryTri()->get();
-        dd($categories);
+        $categories = Category::queryStatusOne()->get();
+        // dd($categories);
         return view('pages.client.categoriesdetail')->with('categories', $categories);
     }
 
 
     public function categories_list($id)
     {
-        $product_cate = DB::table('tpl_category')
-            ->where('status', 1)
-            ->where('deleted_at', NULL)->get();
-        $portfolio = DB::table('tpl_portfolio')
-        ->where('status', 1)
-        ->where('deleted_at',NULL)->get();
+        $product_cate = Category::queryStatusOne()->get();
+        $portfolio = Portfolio::queryStatusOne()->get();
         $categories = Category::find($id);
-        $product_by_category = DB::table('tpl_product')
+        $product_by_category = Product::queryStatusOne()
             ->join('tpl_category', 'tpl_category.cate_id', '=', 'tpl_product.cate_id')
-            ->where('tpl_category.cate_id', $id)
-            ->where('tpl_category.deleted_at', NULL)->get();
+            ->where('tpl_category.cate_id', $id)->get();
         return view('pages.client.categorieslist')
             ->with('categories', $categories)
             ->with('portfolio', $portfolio)
@@ -169,18 +157,16 @@ class ClientController extends Controller
 
     public function portfolio_detail()
     {
-        $portfolio = DB::table('tpl_portfolio')
-        ->where('status', 1)
-        ->where('deleted_at',NULL)->get();
+        $portfolio = Portfolio::queryStatusOne()->get();
         return view('pages.client.portfoliodetail')->with('portfolio', $portfolio);
     }
 
     public function portfolio_list($id)
     {
-        $product_cate = DB::select('select * from tpl_category where status = ?', [1]);
-        $portfolio = DB::select('select * from tpl_portfolio where status = ?', [1]);
+        $product_cate = Category::queryStatusOne()->get();
+        $portfolio = Portfolio::queryStatusOne()->get();
         $port = Portfolio::find($id);
-        $product_by_portfolio = DB::table('tpl_product')
+        $product_by_portfolio = Product::queryStatusOne()
             ->join('tpl_portfolio', 'tpl_portfolio.port_id', '=', 'tpl_product.port_id')
             ->where('tpl_portfolio.port_id', $id)->get();
         return view('pages.client.portfoliolist')
@@ -220,72 +206,6 @@ class ClientController extends Controller
         $key = $request->key;
 
         $product = DB::table('tpl_product')
-            ->where('');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            ->where('product_name','like',$key);
     }
 }

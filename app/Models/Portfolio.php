@@ -34,4 +34,7 @@ class Portfolio extends Model
     public function User(){
         return $this->belongsTo('App\User', 'user_id','id');
     }
+    public function scopeQueryStatusOne($query){
+        return $query->where('tpl_portfolio.status', 1);
+    }
 }

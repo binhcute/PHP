@@ -33,4 +33,7 @@ class Article extends Model
     public function User(){
         return $this->belongsTo('App\User', 'user_id','id');
     }
+    public function scopeQueryStatusOne($query){
+        return $query->where('tpl_article.status', 1);
+    }
 }
